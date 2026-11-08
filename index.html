@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes">
 <meta name="theme-color" content="#113c34">
 <meta name="description" content="مصحف بصائر الشخصي — صفحات المدينة والقيام والحفظ والتدبر">
-<title>مصحف بصائر | التفسير وأسباب النزول والحديث والقيام والتمرير</title>
-<style>
+<title>مصحف بصائر | المصحف الورقي المطابق للصفحات · القراءة التفاعلية · القيام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet"><style>
 :root{--forest:#123d35;--forest2:#276251;--gold:#b59756;--goldL:#e7d8ac;--bg:#edf1ed;--paper:#fffdf7;--ink:#21382f;--muted:#6c7e73;--border:#d7dfd7;--card:#ffffff;--soft:#f5f7f3;--shade:0 12px 35px #1e3d3014;--qsize:34px;--pagepad:36px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,"Segoe UI",Arial,sans-serif}button,select,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c1a558;outline-offset:2px}button:disabled{opacity:.44;cursor:not-allowed}a{color:var(--forest2)}[hidden]{display:none!important}
 body.night{--forest:#142b2d;--forest2:#27675b;--gold:#dfc788;--goldL:#665b40;--bg:#0b1819;--paper:#152627;--ink:#f1eee0;--muted:#b3b8a8;--border:#3b4b46;--card:#182c2c;--soft:#203535;--shade:0 15px 38px #050b0ba1}
@@ -93,6 +93,228 @@ body.focus-reading #quickScroller{opacity:.16;transition:opacity .2s}
 body.focus-reading #quickScroller:hover, body.focus-reading #quickScroller:focus-within{opacity:1}
 @media(max-width:900px){.reader-layout.with-panel{grid-template-columns:minmax(0,1fr)}.panel{position:fixed;top:auto;bottom:0;left:0;right:0;z-index:60;border-radius:18px 18px 0 0;max-height:82dvh;min-height:35vh;box-shadow:0 -12px 60px #0005}.panel-content{min-height:0}.panel-head{padding:12px 16px}#quickScroller{margin-bottom:12px}}
 
+
+/* Continuous scroll: verses are one uninterrupted stream, independent of Madina/Qiyam pagination. */
+.flow-reading .mushaf{min-height:0;max-width:var(--reader-width,1510px);margin-inline:auto;}
+.flow-reading .inner-frame{min-height:0;padding-bottom:44px;}
+.flow-reading .page-title{margin-bottom:12px;}
+.flow-reading .page-foot,.flow-reading .page-bottom-nav{display:none!important;}
+.flow-reading .verses{line-height:var(--read-line,2.2);text-align:justify;word-spacing:var(--words-gap,2px);}
+.flow-reading .verses .verse{scroll-margin-top:110px;}
+.flow-reading .surah-banner{margin-top:24px;}
+.flow-reading .nav input,.flow-reading .nav-count{display:none;}
+.flow-reading #quickScroller{position:relative;z-index:2;}
+#flowToggle.active{background:#d9eadd;border-color:#94bca4;color:#174c3b;font-weight:bold;}
+body.night #flowToggle.active{background:#345e50;color:#fff;}
+.flow-label{font-size:12px;color:var(--forest2);font-weight:700;}
+.flow-reading #readerTip{max-width:1000px}
+@media(max-width:700px){.flow-reading .inner-frame{padding-inline:12px}.flow-reading .verses{line-height:var(--read-line,2.2)}}
+
+/* v5: fixed Madinah line composition and gently alternating page colors */
+#verses.madina-reader{display:block;text-align:initial!important;font-size:initial!important;line-height:normal!important;word-spacing:normal!important;max-width:100%;}
+.madina-page{--tone:#fffdf5;--tone-edge:#c9b883;position:relative;box-sizing:border-box;width:min(100%,1000px);margin:0 auto 26px;padding:15px clamp(14px,3.5vw,50px) 17px;background:var(--tone);border:2px solid var(--tone-edge);border-radius:12px;box-shadow:0 7px 23px #163a2c1b;scroll-margin-top:105px;color:#202d27}
+.madina-page.tone-0{--tone:#fffdf3;--tone-edge:#c1aa7a}.madina-page.tone-1{--tone:#ebf6f0;--tone-edge:#9abfae}.madina-page.tone-2{--tone:#fdf4ea;--tone-edge:#d6b6a1}.madina-page.tone-3{--tone:#f1f1fa;--tone-edge:#b8b5d7}.madina-page.tone-4{--tone:#ebf4fa;--tone-edge:#a9c5d8}.madina-page.tone-5{--tone:#f7f6e9;--tone-edge:#c1c49f}
+body.night .madina-page.tone-0{--tone:#1d3029;--tone-edge:#587864}body.night .madina-page.tone-1{--tone:#202d32;--tone-edge:#587b8c}body.night .madina-page.tone-2{--tone:#302a28;--tone-edge:#8e7163}body.night .madina-page.tone-3{--tone:#282735;--tone-edge:#78708b}body.night .madina-page.tone-4{--tone:#20323c;--tone-edge:#638496}body.night .madina-page.tone-5{--tone:#2d3024;--tone-edge:#7c8862}body.night .madina-page{color:#f4f0e5}
+.madina-page-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--tone-edge);padding:3px 0 8px;margin-bottom:14px;font:600 13px Tahoma,Arial,sans-serif;gap:8px}
+.madina-page-head strong{font-size:17px;color:#285849}body.night .madina-page-head strong{color:#c2decf}
+.madina-page-foot{display:flex;justify-content:space-between;margin-top:15px;padding-top:8px;border-top:1px solid var(--tone-edge);font:12px Tahoma,Arial,sans-serif;color:inherit;opacity:.8}
+.madina-lines{width:100%;direction:rtl;font-family:'Amiri Quran','Amiri','Traditional Arabic',serif;font-size:var(--qsize);line-height:1.93;}
+.madina-line{box-sizing:border-box;display:flex;align-items:baseline;justify-content:space-between;gap:0;direction:rtl;white-space:nowrap;min-height:1.93em;max-width:100%;overflow:visible}
+.madina-line.short{justify-content:center}.madina-line .exact-word{flex-shrink:0;padding:0 1px;line-height:inherit;cursor:inherit;border-radius:3px}
+body.words-on .madina-line .exact-word{cursor:pointer}body.words-on .madina-line .exact-word:hover{background:#eed99677}body.words-off .madina-line .exact-word{pointer-events:none}
+.madina-line .exact-word.hit{background:#f1db8a;color:#3f3320}
+.madina-line .exact-marker{font:12px Tahoma,Arial,sans-serif;min-width:21px;height:21px;border:1px solid var(--tone-edge);border-radius:50%;padding:0 3px;display:inline-flex;justify-content:center;align-items:center;background:#ffffffa0;color:#52634c;vertical-align:middle;flex-shrink:0;cursor:pointer}
+.madina-line .exact-marker:hover{background:#f2e3ba}.madina-line .hideword{color:transparent!important;background:repeating-linear-gradient(90deg,#91a69c77 0,#91a69c77 8px,transparent 8px,transparent 12px);border-radius:4px}
+.madina-surah-title{text-align:center;margin:8px auto 2px;font-size:clamp(17px,2.3vw,24px);font-weight:700;color:#275748;border:1px solid var(--tone-edge);border-radius:25px;max-width:75%;padding:2px 12px;line-height:1.5}
+body.night .madina-surah-title{color:#c0dfcc}
+.madina-bismillah{text-align:center;font:normal calc(var(--qsize)*.85)/1.7 'Amiri Quran','Amiri',serif;white-space:nowrap;margin:4px auto 8px}
+.madina-page .madina-hint{font:12px Tahoma,Arial,sans-serif;color:#9a6833;margin:6px 0}
+.marks-rows{display:grid;gap:9px}.marks-rows>div{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:10px}.marks-rows span{flex:1;min-width:170px;font-size:12px}.jump-status{font-size:11px;color:var(--forest2)}
+body.layout-madina .inner-frame:before,body.layout-madina .inner-frame:after{display:none}
+body.layout-madina .inner-frame{padding:10px 7px 35px;outline:none;border:0;min-height:0}
+body.layout-madina .mushaf{background:transparent;border:0;box-shadow:none;padding:0;min-height:0}
+body.layout-madina.flow-reading .mushaf,body.layout-madina.flow-reading .inner-frame{min-height:0}
+body.layout-madina .page-title,body.layout-madina .page-foot,body.layout-madina #pageSurahBanner{display:none}
+@media(max-width:700px){.madina-page{padding:9px 9px 11px;margin-bottom:15px}.madina-lines{line-height:1.84}.madina-line{min-height:1.84em}.madina-page-head{font-size:11px}.madina-page-head strong{font-size:15px}.madina-line .exact-marker{min-width:16px;height:16px;font-size:10px}.madina-surah-title{font-size:17px}}
+
+/* V6: original QPC V2 per-page printed glyphs. The Unicode renderer remains the fallback. */
+.madina-page.qcf-ready{width:min(100%,780px);padding:12px clamp(15px,4vw,42px) 15px;border:4px double var(--tone-edge);outline:1px solid color-mix(in srgb,var(--tone-edge) 60%, transparent);outline-offset:-10px;border-radius:6px;}
+.madina-page.qcf-ready .madina-page-head{margin-bottom:5px;padding-bottom:5px;border-bottom:0;}
+.madina-page.qcf-ready .madina-lines{font-size:var(--qsize);font-weight:normal;line-height:1.85;font-kerning:normal;font-feature-settings:'liga' 1;}
+.madina-page.qcf-ready .madina-line{min-height:1.82em;line-height:1.82;align-items:center;justify-content:space-between;gap:0;white-space:nowrap;}
+.madina-page.qcf-ready .madina-line.centered{justify-content:center;}
+.madina-page.qcf-ready .exact-word{display:inline-block;flex-shrink:0;white-space:nowrap;line-height:1.82;padding:0 1px;letter-spacing:0;}
+.madina-page.qcf-ready .exact-marker{font:inherit!important;display:inline-block;flex-shrink:0;line-height:1.82;width:auto;height:auto;min-width:0;padding:0 1px;border:0;background:transparent;vertical-align:baseline;color:inherit;border-radius:0;}
+.madina-page.qcf-ready .madina-surah-title{border-radius:3px;max-width:95%;margin:2px auto;font-size:clamp(19px,2.4vw,26px);border:2px solid var(--tone-edge);background:color-mix(in srgb,var(--tone-edge) 12%, transparent);font-family:'Amiri Quran','Amiri',serif;}
+.madina-page.qcf-ready .madina-bismillah{margin:2px auto;line-height:1.55;font-family:'Amiri Quran','Amiri',serif;}
+.madina-page.qcf-ready .madina-page-foot{margin-top:7px;padding-top:4px;}
+.madina-page .print-status{font:11px Tahoma,Arial,sans-serif;color:#426353;text-align:center;padding:4px 0 2px}
+@media(max-width:700px){.madina-page.qcf-ready{padding:8px 11px;outline-offset:-7px}.madina-page.qcf-ready .madina-page-head{margin-bottom:2px}.madina-page.qcf-ready .madina-line{min-height:1.68em;line-height:1.68}.madina-page.qcf-ready .exact-word,.madina-page.qcf-ready .exact-marker{line-height:1.68}}
+
+/* v6.1 — Fixed-on-scroll reading toolbar, without hiding Quran lines */
+:root{--basaer-header-height:80px;--basaer-reading-offset:198px}
+.top{z-index:51}
+.toolbar{
+  position:sticky;
+  top:var(--basaer-header-height);
+  z-index:49;
+  isolation:isolate;
+  background:var(--card);
+  box-shadow:0 9px 24px #08261e22;
+  border-color:var(--border);
+  scroll-margin-top:var(--basaer-header-height);
+}
+html{scroll-padding-top:var(--basaer-reading-offset)}
+.madina-page,.madina-line,.verses .verse,.mushaf,.surah-banner,[id^="v-"]{
+  scroll-margin-top:var(--basaer-reading-offset) !important;
+}
+/* On tablets/phones the entire controls strip remains reachable without
+   swallowing half the Quran display: swipe the single-line strip sideways. */
+@media(max-width:1100px){
+  .toolbar{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    border-radius:11px;
+  }
+  .toolbar > *{flex-shrink:0;scroll-snap-align:start}
+  .toolbar .divider{display:none}
+}
+@media(max-width:700px){
+  body.mode-qiyam .toolbar{display:flex}
+  .toolbar{padding:8px 10px;margin-bottom:9px;gap:7px}
+  .toolbar .muted{font-size:11px}
+}
+@media print{.toolbar{position:static!important}}
+
+
+/* V7 — Keep top tools AND surah/page navigation in view while reading. */
+:root { --basaer-nav-top:150px; --basaer-reading-offset:220px; }
+.top{position:sticky;top:0;z-index:61}
+.toolbar{position:sticky;top:var(--basaer-header-height);z-index:59;box-shadow:0 7px 16px #123d3530;margin-bottom:8px}
+.reading > .nav{position:sticky;top:var(--basaer-nav-top);z-index:57;background:var(--card);border:1px solid var(--border);padding:7px 10px;border-radius:11px;box-shadow:0 6px 14px #123d351b;isolation:isolate;scroll-margin-top:var(--basaer-reading-offset)}
+.reading > .nav > *{flex-shrink:0}
+.print-badge{font:600 11px/1.5 Tahoma,Arial,sans-serif;display:inline-flex;align-items:center;border:1px solid #c9be94;background:#fff7d9;color:#604d19;padding:6px 8px;border-radius:30px;white-space:nowrap}
+.print-badge.is-ok{color:#18583b;background:#e4f3e8;border-color:#9dceb0}
+.print-badge.is-error{color:#8b5129;background:#fff0df;border-color:#e7bd9b}
+.madina-page,.madina-line,.mushaf,[id^="v-"]{scroll-margin-top:var(--basaer-reading-offset)!important}
+/* The printed book has a narrow, fixed, PORTRAIT page; never stretch the text across the desktop. */
+.madina-page,.madina-page.qcf-ready{width:min(100%,700px)!important;max-width:700px;aspect-ratio:0.705;box-sizing:border-box;border:7px ridge var(--tone-edge);border-radius:3px;outline:1px solid var(--tone-edge);outline-offset:-12px;padding:15px clamp(14px,3.5vw,37px) 16px;background-color:var(--tone)}
+.madina-page .madina-lines{width:100%;direction:rtl}
+.madina-page .madina-line{width:100%;white-space:nowrap;flex-wrap:nowrap;overflow:visible}
+.madina-page .madina-surah-title{border:2px double var(--tone-edge);padding:1px 12px;margin:0 auto 4px;border-radius:4px;font-family:'Amiri Quran','Amiri','Traditional Arabic',serif}
+.madina-page.qcf-ready .madina-line{justify-content:space-between;white-space:nowrap;letter-spacing:0}
+.madina-page.qcf-ready .madina-line.centered{justify-content:center}
+.madina-page .print-status{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:5px auto 3px;font:11px Tahoma,Arial,sans-serif;color:#587362}
+.madina-page .print-status.warning{color:#91501c}
+.madina-page .print-status button{background:transparent;color:inherit;border:1px solid currentColor;border-radius:5px;padding:1px 6px;font-size:11px}
+.madina-page:not(.qcf-ready) .madina-page-head{margin-bottom:4px;padding-bottom:4px}
+.madina-page:not(.qcf-ready) .madina-lines{line-height:1.8}
+.madina-page:not(.qcf-ready) .madina-line{min-height:1.78em}
+@media(max-width:1100px){
+  .reading > .nav{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:thin;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .toolbar{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin}
+}
+@media(max-width:700px){
+  .reading > .nav{gap:7px;padding:6px;margin:0 0 8px}
+  .madina-page,.madina-page.qcf-ready{width:100%!important;aspect-ratio:0.705;padding:7px 10px;border-width:4px;outline-offset:-7px}
+  .madina-page .madina-page-foot{margin-top:2px}
+  .madina-page .madina-page-head{font-size:11px}
+}
+body.focus-reading .reading > .nav{display:none}
+@media print{.reading > .nav,.toolbar,.top{position:static!important}.print-badge,.print-status{display:none!important}}
+
+/* Pinned tools must be fully opaque over sacred text. */
+body.mode-qiyam .toolbar,body.mode-hifz .toolbar,body.mode-tadabbur .toolbar{opacity:1!important;background:var(--card)!important}
+.reading > .nav{opacity:1!important;background:var(--card)!important}
+
+/* V8 – Printed Mushaf as actual page IMAGE, not stretched web text. */
+:root{--paper-width:630px}
+.paper-sizebar{display:none;align-items:center;gap:6px;font:600 11px Tahoma,Arial,sans-serif;white-space:nowrap;color:var(--forest2);border:1px solid var(--border);padding:3px 7px;border-radius:8px;background:var(--soft)}
+.paper-sizebar input{width:90px;accent-color:#39765b}.paper-sizebar output{font-variant-numeric:tabular-nums;min-width:28px}
+body.layout-paper .paper-sizebar{display:flex}
+body.layout-paper .sizebar,body.layout-paper #wordTapToggle,body.layout-paper #printedFontBadge{display:none!important}
+body.layout-paper .tool-switch:has(#wordTapToggle){display:none!important}
+body.layout-paper .mushaf{background:transparent;border:0;box-shadow:none;min-height:0;padding:0}
+body.layout-paper .inner-frame{background:transparent;outline:0;border:0;min-height:0;padding:0}
+body.layout-paper .page-title,body.layout-paper .page-foot,body.layout-paper #pageSurahBanner{display:none!important}
+#verses.paper-reader{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:100%;text-align:initial!important;font-size:initial!important;word-spacing:normal!important;line-height:normal!important}
+.paper-page{--paper-tint:#f5f6ee;--paper-border:#a8bb99;box-sizing:border-box;position:relative;width:min(100%,var(--paper-width));max-width:100%;margin-inline:auto;background:var(--paper-tint);border:1px solid var(--paper-border);border-radius:7px;padding:9px;box-shadow:0 8px 27px #112d261b;scroll-margin-top:var(--basaer-reading-offset,220px);direction:rtl}
+.paper-page.tone-0{--paper-tint:#faf8ed;--paper-border:#b9ae8d}.paper-page.tone-1{--paper-tint:#eff8f1;--paper-border:#9cb9a5}.paper-page.tone-2{--paper-tint:#fcf2ec;--paper-border:#c6a99b}.paper-page.tone-3{--paper-tint:#f3f1fb;--paper-border:#aaa5c4}.paper-page.tone-4{--paper-tint:#eef6fb;--paper-border:#9fb8c8}.paper-page.tone-5{--paper-tint:#faf8e9;--paper-border:#bcbc98}
+.paper-image-wrap{position:relative;width:100%;overflow:hidden;background:#fff;direction:ltr;border:3px double #477b53;box-shadow:inset 0 0 0 2px #e8b7c9;padding:10px 8px;min-height:100px}
+.paper-page-image{display:block;width:100%;height:auto;aspect-ratio:1260/2038;object-fit:fill;background:#fff;user-select:none;-webkit-user-select:none;pointer-events:none}
+.paper-rosette{position:absolute;z-index:1;font:normal 18px Georgia,serif;color:#277c47;background:#ffedfa;line-height:1;padding:1px 4px;border:1px solid #b67ba4;border-radius:50%;pointer-events:none}
+.paper-rosette.start{top:4px;right:4px}.paper-rosette.end{bottom:4px;left:4px}
+.paper-page-top{display:flex;align-items:center;justify-content:space-between;padding:3px 6px 7px;gap:8px;color:var(--forest2);font:600 12px Tahoma,Arial,sans-serif;direction:rtl}
+.paper-page-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:6px;padding:4px 6px;color:#5c6c61;font:11px Tahoma,Arial,sans-serif;direction:rtl}
+.paper-page-bottom .paper-link{border:1px solid #b6c8b8;border-radius:7px;padding:5px 9px;background:#fff;color:#23513b;font:600 11px Tahoma,Arial,sans-serif;cursor:pointer}
+.paper-page-bottom .paper-link:hover{background:#dcece1}
+.paper-page .paper-error{padding:24px 14px;text-align:center;color:#91452b;border:1px solid #e4c1b5;background:#fff3ed;font:14px Tahoma,Arial,sans-serif;direction:rtl;line-height:2}
+.paper-mode-explain{font:12px Tahoma,Arial,sans-serif;line-height:1.85;color:#3d6b51;background:#f0f7ee;border:1px solid #bad4bb;border-radius:9px;padding:8px 12px;width:min(100%,var(--paper-width));text-align:center;margin:auto}
+body.night .paper-page{box-shadow:0 5px 20px #0009}body.night .paper-page-top{color:#24573f}
+@media (max-width:700px){#verses.paper-reader{gap:13px}.paper-page{padding:4px;border-radius:2px}.paper-image-wrap{padding:4px 3px;border-width:2px}.paper-page-top{padding:4px 4px 6px}.paper-page-bottom{padding-inline:4px}.paper-rosette{font-size:12px}.paper-mode-explain{font-size:11px}}
+@media print{.paper-page-bottom,.paper-mode-explain,.paper-page-top{display:none}.paper-page{break-after:page;box-shadow:none;padding:0;border:none}.paper-image-wrap{border:0;padding:0}}
+
+/* بصمة عائمة مستوحاة من AssistiveTouch — إعدادات بلا شريط يحتجب به النص */
+:root{--assistant-edge:14px}
+.top{position:relative;z-index:20}.topinner{min-height:55px;padding:9px 17px}
+.topinner .brand strong{font-size:18px}
+.topinner .top-center,.topinner .top-action{display:none}
+.container{padding-top:8px;max-width:1720px}
+.container > .toolbar{display:none!important}
+.data-status{padding-inline:5px}
+.reading > .nav{position:sticky;top:0;z-index:26;margin:0 auto 10px;max-width:1510px}
+#assistiveOrb{position:fixed;right:14px;top:54%;width:62px;height:62px;border:1px solid #ffffffa1;border-radius:50%;background:radial-gradient(circle at 25% 20%,#ffffffa2,#ffffff47 36%,#b9d2c07c 90%);color:#12513c;backdrop-filter:blur(12px) saturate(135%);-webkit-backdrop-filter:blur(12px);box-shadow:0 5px 17px #0e46396b,inset 0 0 0 2px #ffffff4d;z-index:85;display:grid;place-items:center;touch-action:none;user-select:none;cursor:grab;opacity:.78;transition:opacity .15s,transform .15s}
+#assistiveOrb:hover,#assistiveOrb:focus-visible{opacity:1;transform:scale(1.055)}
+#assistiveOrb svg{width:36px;height:36px;filter:drop-shadow(0 1px 0 #fff8)}
+#assistiveOrb:active{cursor:grabbing}body.night #assistiveOrb{color:#ddf6e8;background:#164d4d9c}
+.assistive-scrim{position:fixed;inset:0;background:#001b1694;backdrop-filter:blur(3px);z-index:95;display:flex;justify-content:flex-start;align-items:center;padding:16px}
+.assistive-scrim[hidden]{display:none!important}
+.assistive-sheet{width:min(520px,100%);max-height:min(91dvh,930px);background:color-mix(in srgb,var(--card) 94%,transparent);box-shadow:0 22px 65px #00161083;border:1px solid #ffffff61;border-radius:26px;overflow:auto;overscroll-behavior:contain;padding:18px;display:flex;flex-direction:column;gap:13px;color:var(--ink)}
+.assistive-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.assistive-heading strong{font-size:18px;display:block}.assistive-heading small{display:block;color:var(--muted);font-size:11px;line-height:1.7;margin-top:5px}
+#closeAssistive{width:38px;height:38px;flex-shrink:0;border:1px solid var(--border);border-radius:50%;background:var(--soft);color:var(--ink);font-size:21px;cursor:pointer}
+.assistive-mode-slot .top-center{display:flex;justify-content:space-between;width:100%;background:var(--soft);border:1px solid var(--border);border-radius:16px}
+.assistive-mode-slot .mode-btn{color:var(--ink);font-size:13px;flex:1;padding:11px 5px}.assistive-mode-slot .mode-btn.active{background:var(--forest2);color:#fff}
+.assistive-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.assistive-shortcuts button{padding:14px 9px;border:1px solid var(--border);background:var(--soft);color:var(--ink);border-radius:14px;cursor:pointer;line-height:1.6;font-weight:600;font-size:13px}
+.assistive-shortcuts button[aria-pressed="true"]{background:#dcefe5;color:#176346;border-color:#92c7a8}
+.assistive-shortcuts .assistive-fast-btn{background:var(--forest2);color:#fff}
+.assistive-group-title{font-size:12px;color:var(--forest2);font-weight:bold;margin-bottom:-5px}
+#assistiveToolbarSlot .toolbar{position:static!important;top:auto!important;display:flex!important;overflow:visible!important;flex-wrap:wrap!important;white-space:normal!important;box-shadow:none;border:1px solid var(--border);border-radius:16px;margin:0;padding:12px;gap:8px;background:var(--soft);opacity:1!important}
+#assistiveToolbarSlot .toolbar>*{flex-shrink:0}#assistiveToolbarSlot .toolbar .seg{flex-wrap:wrap;white-space:normal}#assistiveToolbarSlot .toolbar .seg button{font-size:12px}
+#assistiveToolbarSlot .toolbar .sizebar{width:100%;justify-content:space-between}#assistiveToolbarSlot .toolbar .sizebar input{width:52%}
+#assistiveToolbarSlot .toolbar .divider{height:1px;width:100%;margin:5px 0;background:var(--border)}
+.assistive-actions{display:flex;gap:9px;flex-wrap:wrap}
+.assistive-actions .top-action{background:var(--forest2);color:#fff;flex:1;min-width:140px;border-radius:14px}
+.assistive-hint{margin:0;color:var(--muted);font-size:11px;line-height:1.75}
+/* الوجهان: الصفحة الفردية يمينًا، والزوجية يسارًا، مثل صورة المصحف الورقي */
+.page-spread{width:100%;max-width:1520px;margin:0 auto 18px;display:grid;direction:rtl;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:14px}
+.page-spread > *{min-width:0!important;width:100%!important;max-width:none!important;margin:0!important}
+#verses.paper-reader:has(.page-spread){align-items:stretch}
+#verses.paper-reader .paper-spread .paper-page{width:100%;margin:0}
+body.spread-two.flow-reading.layout-paper #verses.paper-reader{display:grid;direction:rtl;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:16px}
+body.spread-two.flow-reading.layout-paper #verses.paper-reader > .page-spread{grid-column:1/-1}
+body.spread-two.flow-reading.layout-paper #verses.paper-reader > .paper-page{margin:0}
+body.spread-two.flow-reading.layout-madina #verses.madina-reader{display:grid;direction:rtl;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+body.spread-two.flow-reading.layout-madina #verses.madina-reader > .madina-page{margin:0;width:100%;max-width:none;min-width:0}
+.madina-spread .madina-page{max-width:none}
+.layout-qiyam:not(.flow-reading) .mushaf{width:min(100%,1150px);max-width:1150px;min-height:0;margin-inline:auto}
+.layout-qiyam:not(.flow-reading) .inner-frame{min-height:0;padding:32px clamp(20px,4vw,58px) 66px}
+.layout-qiyam:not(.flow-reading):not(.spread-two) #verses{display:block;text-align:justify;text-align-last:right;direction:rtl;font-size:var(--qsize);line-height:var(--read-line,2);word-spacing:var(--words-gap,2px);width:100%;max-width:none}
+.layout-qiyam:not(.flow-reading) #verses .verse{display:inline}
+.layout-qiyam.spread-two:not(.flow-reading) .mushaf{width:100%;max-width:1500px}
+.layout-qiyam.spread-two:not(.flow-reading) #verses .page-spread{width:100%;max-width:1450px;font-size:var(--qsize);text-align:justify;line-height:var(--read-line,2);font-family:var(--read-font)}
+.qiyam-face{background:var(--paper);border:1px solid #d7bc78;border-radius:12px;padding:24px 20px 42px;box-shadow:0 4px 14px #083f2514;line-height:var(--read-line,2);text-align:justify;text-align-last:right;min-width:0}
+.qiyam-face-header{font:600 13px Tahoma,sans-serif;color:var(--forest2);text-align:center;border-bottom:1px solid var(--goldL);padding:0 0 12px;margin:0 0 18px}
+#verses .qiyam-spread .verse-number{font-size:11px;min-width:22px;height:22px}
+@media(max-width:940px){.page-spread{grid-template-columns:minmax(0,1fr)}body.spread-two.flow-reading.layout-madina #verses.madina-reader{grid-template-columns:1fr}body.spread-two.flow-reading.layout-paper #verses.paper-reader{grid-template-columns:1fr}#assistiveOrb{width:56px;height:56px;right:9px}#assistiveOrb svg{width:31px;height:31px}.assistive-scrim{padding:8px}.assistive-sheet{max-height:95dvh;border-radius:22px}}
+@media print{#assistiveOrb,#assistiveScrim{display:none!important}}
+
 </style>
 </head>
 <body class="layout-madina mode-qiyam">
@@ -104,25 +326,26 @@ body.focus-reading #quickScroller:hover, body.focus-reading #quickScroller:focus
 <main class="container">
  <div class="toolbar" aria-label="إعدادات العرض">
   <span class="muted" style="font-size:12px">التخطيط</span>
-  <div class="seg"><button class="active" data-layout="madina">صفحات المدينة</button><button data-layout="qiyam">مصحف القيام (٤/جزء)</button></div>
+  <div class="seg"><button class="active" data-layout="madina">صفحات المدينة التفاعلية</button><button data-layout="paper" type="button" title="صورة صفحة مصحف المدينة كما هي، بلا تغيير للأسطر" aria-label="المصحف الورقي للقراءة فقط">📖 المصحف الورقي</button><button data-layout="qiyam">مصحف القيام (٤/جزء)</button></div><label class="paper-sizebar" id="paperSizeBar" for="paperPageWidth" title="عرض صورة الصفحة دون تغيير الخط أو الأسطر">عرض الصفحة <input id="paperPageWidth" type="range" min="390" max="820" step="10" value="630"><output id="paperPageWidthText">٦٣٠</output></label>
   <span class="divider"></span>
+  <button class="btn small" id="flowToggle" type="button" aria-pressed="false">⇵ قراءة متصلة</button><button class="btn small" id="toolbarScrollBtn" type="button" aria-label="تشغيل أو إيقاف التمرير التلقائي">▶ التمرير التلقائي</button>
   <div class="sizebar"><label for="fontSize" class="range-label muted">حجم الخط</label><input id="fontSize" type="range" min="25" max="62" value="34" aria-label="حجم خط القرآن"><span id="fontNumber" class="range-label">٣٤</span></div>
   <span class="divider"></span>
   <label class="tool-switch" title="تشغيل وإيقاف فتح مواضع الكلمات عند لمسها"><input id="wordTapToggle" type="checkbox" checked> الضغط على الكلمات</label>
   <button class="btn small" id="readToolsBtn">♿ خيارات القراءة</button>
   <button class="btn small" id="themeBtn">◐ الوضع الليلي</button>
-  <button class="btn small" id="bookmarkBtn">☆ علامة</button>
-  <button class="btn small" id="bookmarksBtn">☷ علاماتي</button>
+  <button class="btn small primary" id="jumpOpen">☷ انتقال</button><button class="btn small" type="button" id="compareGhafir" title="اختبار المطابقة مع الصورة الورقية: ص ٤٧٣ ثم ٤٧٤">📖 مقارنة ص ٤٧٣–٤٧٤</button><button class="btn small" id="bookmarkBtn">☆ علامة</button>
+  <button class="btn small" id="markRead">◈ حدد قراءتي</button><button class="btn small" id="markHifz">◎ حدد حفظي</button><button class="btn small" id="bookmarksBtn">☷ علاماتي</button>
   <button class="btn small" id="fullBtn">⛶ ملء الشاشة</button>
-  <button class="btn small" id="wakeBtn" title="منع إطفاء الشاشة إن سمح المتصفح">☀ إبقاء الشاشة</button>
+  <button class="btn small" id="wakeBtn" title="منع إطفاء الشاشة إن سمح المتصفح">☀ إبقاء الشاشة</button><span id="printedFontBadge" class="print-badge" role="status" aria-live="polite">الخط الأصلي: جارِ الفحص</span>
  </div>
  <div class="data-status"><span class="online-status" id="status" role="status">جاري تجهيز بيانات المصحف…</span><span id="personalStatus">يُحفظ آخر موضع تلقائيًا على جهازك</span></div>
  <div class="reader-layout" id="readerLayout">
   <section class="reading">
-   <div class="nav"><div class="nav-side"><button class="btn" id="prevBtn">❯ السابق</button><span class="nav-count" id="navCount">صفحة</span><input id="pageNum" type="number" min="1" max="604" value="1" aria-label="رقم صفحة المصحف"><button class="btn" id="nextBtn">التالي ❮</button></div><select id="surahSelect" aria-label="انتقل إلى سورة"><option>الفاتحة</option></select><div class="qiyam-controls"><button class="btn small" id="gotoGhafir">العودة لغافر</button></div></div>
+   <div class="nav"><div class="nav-side"><button class="btn" id="prevBtn">❯ السابق</button><span class="nav-count" id="navCount">صفحة</span><input id="pageNum" type="number" min="1" max="604" value="1" aria-label="رقم صفحة المصحف"><button class="btn" id="nextBtn">التالي ❮</button></div><select id="surahSelect" aria-label="انتقل إلى سورة"><option>الفاتحة</option></select><div class="qiyam-controls"><button class="btn small" id="gotoGhafir" hidden>مخفي</button></div></div>
    <div class="hifz-tips"><button class="btn small active" id="hideToggle">▨ إخفاء الآيات</button><button class="btn small" id="showAllBtn">إظهار الكل</button><small>اضغط على الآية المخفية لكشفها، وعلى رقمها لتسجيل الحفظ</small></div>
    <article class="mushaf" aria-label="صفحة القرآن الكريم"><div class="inner-frame"><div class="page-title"><span class="chapter" id="chapterLabel">سورة الفاتحة</span><span id="juzLabel">الجزء الأول</span><span id="pageLabel">ص ١</span></div><div id="pageSurahBanner"></div><div class="verses" id="verses" aria-live="polite"></div><div class="page-foot" id="pageFoot">﴿ ١ ﴾</div></div></article>
-   <div id="quickScroller" aria-label="التمرير التلقائي أثناء القراءة"><button class="btn primary" id="quickScrollBtn" type="button">▶ بدء التمرير</button><label for="quickScrollSpeed">السرعة</label><input id="quickScrollSpeed" type="range" min="5" max="85" value="20" aria-label="سرعة التمرير التلقائي"><output id="quickScrollSpeedValue">٢٠ بكسل/ث</output></div>
+   <div id="quickScroller" aria-label="التمرير التلقائي أثناء القراءة"><span class="flow-label" id="flowLabel">وضع الصفحات</span><button class="btn primary" id="quickScrollBtn" type="button">▶ بدء التمرير</button><label for="quickScrollSpeed">السرعة</label><input id="quickScrollSpeed" type="range" min="5" max="85" value="20" aria-label="سرعة التمرير التلقائي"><output id="quickScrollSpeedValue">٢٠ بكسل/ث</output></div>
    <nav class="page-bottom-nav" aria-label="التنقل أسفل صفحة المصحف"><button class="btn" id="underPrev">❯ السابق</button><span class="center-label" id="underPage">صفحة ١</span><button class="btn" id="underNext">التالي ❮</button></nav>
    <p class="tip" id="readerTip">اضغط على الكلمة في وضع التدبر لمعرفة كل مواضعها دون مغادرة الصفحة، أو اضغط على رقم الآية لكتابة ملاحظتك.</p>
   </section>
@@ -132,11 +355,18 @@ body.focus-reading #quickScroller:hover, body.focus-reading #quickScroller:focus
 <nav class="bottom-controls" aria-label="التنقل السريع"><button class="btn" id="mobilePrev">❯ السابق</button><span class="nav-count" id="bottomPage">١ / ٦٠٤</span><button class="btn" id="mobileNext">التالي ❮</button></nav>
 <div class="overlay" id="searchOverlay" hidden><section class="dialog" aria-label="البحث المستقل"><div class="dialoghead"><h3>البحث المستقل في القرآن الكريم</h3><button class="panel-close" id="closeSearch">✕</button></div><div class="dialogbody"><form class="searchrow" id="searchForm"><input id="searchInput" type="search" placeholder="اكتب كلمة أو جزءًا من آية…" autocomplete="off" required><button type="submit" class="btn primary">بحث</button></form><div class="meta-note">يتم تجاهل التشكيل في المطابقة، ويمكن البحث بجزء من الكلمة أو عبارة. البحث منفصل عن لمس الكلمة في المصحف.</div><div id="searchResults" class="search-results"></div></div></section></div>
 <div class="overlay" id="settingsOverlay" hidden><section class="dialog" aria-label="إعدادات المصحف"><div class="dialoghead"><h3>إعدادات مصحفي</h3><button class="panel-close" id="closeSettings">✕</button></div><div class="dialogbody">
- <div class="setting-group"><label>ابدأ سورة معينة</label><div class="setting-row"><select id="surahSettings"><option>الفاتحة</option></select><button class="btn primary" id="jumpSurah">انتقال</button><button class="btn" id="jumpGhafir">سورة غافر</button></div></div>
- <div class="setting-group"><label>تخطيط المصحف وأوضاع القراءة</label><p class="meta-note">«صفحات المدينة»: يحافظ على تجميع الآيات وفق الصفحات الـ٦٠٤، وليس تطابقًا حرفيًا مع الأسطر الـ١٥ والخط الطباعي. «مصحف القيام»: يجمع كل جزء في أربع صفحات قرآنية طويلة (قرابة خمس صفحات مدينة لكل صفحة قيام)، ويستهدف تقليل تقليب الصفحات. تجميع إلكتروني تقريبي لا يطابق أسطر النسخة المطبوعة حرفيًا؛ ستحتاج إلى التمرير للقراءة الواضحة على التابلت. أوضاع القيام والحفظ والتدبر مستقلة عن التخطيط.</p></div>
+ <div class="setting-group"><label>ابدأ سورة معينة</label><div class="setting-row"><select id="surahSettings"><option>الفاتحة</option></select><button class="btn primary" id="jumpSurah">انتقال</button><button class="btn" id="jumpGhafir" hidden>مخفي</button></div></div>
+ <div class="setting-group"><label>تخطيط المصحف وأوضاع القراءة</label><p class="meta-note">«صفحات المدينة»: يستخدم ملفات ترتيب الكلمات بحسب الأسطر الحقيقية لطبعة المدينة، ويحافظ على فواصل الأسطر والصفحات في وضع التقليب وكذلك التمرير. التمرير يعرض صفحات ملونة متتابعة بوضوح. «المصحف الورقي»: صورة صفحة كاملة بتخطيط الكلمات والأسطر الطباعي الأصلي، للقراءة فقط، من مصدر صور صفحات مصحف المدينة. لا تُعاد كتابة الكلمات في هذا الوضع، ويحتاج تحميل الصور إلى الإنترنت. «مصحف القيام»: تقسيم تقريبي إلى أربع صفحات لكل جزء؛ لا يطابق مصحف المدينة في عدد الأسطر. يحاول تخطيط المدينة استخدام الخط الطباعي QCF V2 الخاص بكل صفحة، وتظهر رسالة واضحة إن تعذّر تحميله. أوضاع القيام والحفظ والتدبر مستقلة عن التخطيط.</p></div>
  <div class="setting-group"><label>التفسير والأحاديث وأسباب النزول</label><p class="meta-note">اضغط على رقم الآية لفتح لوحة علمية داخل المصحف: تفسير مباشر من الموسوعة القرآنية، ونقولات أسباب النزول من مصادرها، وأحاديث مختارة موثقة حيث تمت مراجعتها. «في ظلال القرآن» يمكن قراءته داخل اللوحة بعد إضافة نصه من نسختك المسموح لك باستخدامها (نص الآية أو ملف JSON مرتبط بالآيات). لا نعرض مصدرًا أو درجة صحة لم نتحقق منها.</p></div>
- <div class="setting-group"><label>بيانات المصحف والخصوصية</label><button class="btn small" id="reloadData" style="margin:0 0 10px">↻ إعادة محاولة تحميل القرآن كاملًا</button><p class="meta-note" id="dataInfo">يُحمّل القرآن الكريم في أول تشغيل متصل بالإنترنت، ويحاول الاحتفاظ بنسخة محلية لاستخدامها لاحقًا دون إنترنت. مواضع الحفظ والملاحظات محفوظة على هذا الجهاز فقط.</p></div>
- <div class="setting-group"><label>المصدر</label><p class="meta-note">نص الآيات: <a href="https://alquran.cloud/api" target="_blank" rel="noopener">AlQuran Cloud — نسخة quran-uthmani</a>. ترقيم الصفحات يُؤخذ من بيانات المصدر. لا يتم تعديل نص الآيات، بل تُطبّق المعالجة على فهرس البحث فقط. يجب مراجعة التنسيق والخط مع مصحف معتمد قبل اعتماد التطبيق رسميًا.</p></div>
+ <div class="setting-group"><label>بيانات المصحف والخصوصية</label><p class="meta-note">يمكنك تخزين بيانات أسطر الصفحات الـ٦٠٤ على الجهاز بعد تنزيلها أول مرة. خطوط QCF المصحفية لكل صفحة تُحمّل منفصلة، وقد تحتاج إلى الإنترنت حتى لو حُفظت بيانات الأسطر. استخدم Wi-Fi واترك الصفحة مفتوحة حتى يكتمل.</p><button class="btn small" type="button" id="cacheAllPages">↓ حفظ جميع صفحات المدينة دون إنترنت</button><span id="cacheProgress" class="jump-status" aria-live="polite" style="margin-inline-start:10px"></span><button class="btn small" id="reloadData" style="margin:0 0 10px">↻ إعادة محاولة تحميل القرآن كاملًا</button><p class="meta-note" id="dataInfo">يُحمّل القرآن الكريم في أول تشغيل متصل بالإنترنت، ويحاول الاحتفاظ بنسخة محلية لاستخدامها لاحقًا دون إنترنت. مواضع الحفظ والملاحظات محفوظة على هذا الجهاز فقط.</p></div>
+ <div class="setting-group"><label>المصدر</label><p class="meta-note">النص الكامل للفهرسة: <a href="https://alquran.cloud/api" target="_blank" rel="noopener">AlQuran Cloud — نسخة quran-uthmani</a>. أسطر صفحات المدينة: <a href="https://github.com/ouryhamdalaye/madinah-mushaf-json" target="_blank" rel="noopener">Madinah Mushaf JSON</a> (ترخيص CC BY-SA 4.0 للبيانات؛ راجع المصدر وشرط النسبة والمشاركة بالمثل). النص القرآني نفسه لا يخضع لهذا الترخيص. يحافظ التطبيق على ترتيب كلمات الأسطر؛ أما تحاول نسخة المدينة تحميل خط QCF V2 المصحفي المخصص لكل صفحة، مع بيان حالة تحميل الخط. إذا تعذّر تُعرض الكلمات على الأسطر الأصلية بخط بديل مع تنبيه ظاهر. تُراجع المطابقة البصرية مع مصحفك الورقي قبل الاعتماد للحفظ. صور وضع «المصحف الورقي» تحافظ على نص الكلمات والأسطر، لكنها لا تشمل بالضرورة الزخرفة الملونة المطبوعة في نسختك. الصور من مستودع quran-hd-images (مبني على مخطوط مصحف المدينة لمجمع الملك فهد)، مع مصدر بديل Quran-Images. الصور تُحمَّل من الإنترنت ولا تُخزَّن داخل ملف HTML؛ هذا الوضع للقراءة فقط ولا يسمح بالضغط على الكلمات.</p></div>
+ </div></section></div>
+
+<div class="overlay" id="jumpOverlay" hidden><section class="dialog" aria-label="الانتقال وحفظ المواضع"><div class="dialoghead"><h3>الانتقال ومواضعي في المصحف</h3><button class="panel-close" id="jumpClose" type="button">✕</button></div><div class="dialogbody">
+ <div class="access-block"><h4>انتقل إلى سورة وآية</h4><div class="setting-row"><select id="jumpSura" aria-label="السورة"></select><label>الآية <input type="number" id="jumpAya" min="1" value="1" style="width:90px"/></label><button class="btn primary" id="jumpAyahGo">انتقال</button></div></div>
+ <div class="access-block"><h4>انتقل إلى صفحة أو جزء</h4><div class="setting-row"><label>صفحة مدينة <input type="number" id="jumpPageNo" min="1" max="604" value="1" style="width:90px"/></label><button class="btn" id="jumpPageGo">إلى الصفحة</button><label>الجزء <select id="jumpJuz"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option></select></label><button class="btn" id="jumpJuzGo">إلى الجزء</button></div></div>
+ <div class="access-block"><h4>موضع القراءة وموضع الحفظ — علامتان مستقلتان</h4><div class="marks-rows"><div><span id="readMarkLabel">لم تحدد موضع قراءتك</span><button class="btn small" id="returnRead">الرجوع لقراءتي</button><button class="btn small" id="saveReadHere">تحديد هنا</button></div><div><span id="hifzMarkLabel">لم تحدد موضع حفظك</span><button class="btn small" id="returnHifz">الرجوع لحفظي</button><button class="btn small" id="saveHifzHere">تحديد هنا</button></div></div></div>
+ <p class="meta-note">تُحفظ العلامات على هذا الجهاز والمتصفح فقط. زر «آخر قراءة تلقائية» منفصل عن العلامتين اليدويتين.</p><button class="btn" id="returnLast">العودة لآخر قراءة تلقائية</button>
  </div></section></div>
 <div class="overlay" id="bookmarksOverlay" hidden><section class="dialog"><div class="dialoghead"><h3>علاماتي المرجعية</h3><button class="panel-close" id="closeBookmarks">✕</button></div><div class="dialogbody"><div id="bookmarksList" class="bookmark-list"></div></div></section></div>
 <div class="overlay access-overlay" id="readingOverlay" hidden><section class="dialog" aria-label="خيارات القراءة وإمكانية الوصول"><div class="dialoghead"><h3>خيارات القراءة — مثل مكتبة الملكوت</h3><button class="panel-close" id="closeReading">✕</button></div><div class="dialogbody">
@@ -148,11 +378,15 @@ body.focus-reading #quickScroller:hover, body.focus-reading #quickScroller:focus
   <div class="access-line"><label for="accessWords">تباعد الكلمات</label><input id="accessWords" type="range" min="0" max="12" step="1" value="2"><output id="accessWordsValue">٢</output></div>
   <div class="access-line"><label for="accessWidth">عرض الصفحة</label><input id="accessWidth" type="range" min="740" max="1600" step="20" value="1510"><output id="accessWidthValue">١٥١٠</output></div>
  </div>
- <div class="access-block"><h4>القراءة دون استخدام اليد</h4>
+  <div class="access-block"><h4>طريقة عرض الآيات</h4>
+  <label class="tool-switch"><input type="checkbox" id="continuousToggle"> القراءة المتصلة: الآيات سطور متتابعة بلا تقليب صفحات</label>
+  <p class="meta-note">في صفحات المدينة تظهر كل صفحة بسطورها الأصلية وخلفية مميزة، وتستمر الصفحات أسفل بعضها بلا تقليب. التمرير التلقائي يفعّل ذلك تلقائيًا. ومصحف القيام له تخطيط مستقل.</p>
+  </div>
+  <div class="access-block"><h4>القراءة دون استخدام اليد</h4>
   <div class="access-line"><label for="scrollSpeed">سرعة التمرير التلقائي</label><input id="scrollSpeed" type="range" min="5" max="85" step="1" value="20"><output id="scrollSpeedValue">٢٠</output><span class="pill-mini">بكسل/ث</span></div>
   <div class="access-line"><button class="btn primary" id="autoScrollBtn">▶ بدء التمرير التلقائي</button><button class="btn" id="focusBtn">⛶ وضع التركيز</button></div>
   <div class="access-line"><button class="btn" id="readingWake">☀ إبقاء الشاشة مضاءة</button><button class="btn" id="readingFull">⛶ ملء الشاشة</button></div>
-  <p class="meta-note">التمرير يتوقف عند نهاية الصفحة ولا ينتقل تلقائيًا إلى الصفحة التالية. إبقاء الشاشة مضاءة وملء الشاشة يتطلبان سماح المتصفح.</p>
+  <p class="meta-note">في وضع التمرير المتصل تُضاف الآيات التالية آليًا دون الوقوف عند نهاية الصفحة، ويستمر حتى نهاية المصحف. إبقاء الشاشة مضاءة وملء الشاشة يتطلبان سماح المتصفح.</p>
  </div>
  <div class="access-block"><h4>اللمس والاستكشاف</h4>
   <label class="tool-switch"><input id="accessWordTap" type="checkbox" checked> تفعيل الضغط على الكلمة لعرض جميع مواضعها. عند الإيقاف يمكنك لمس الشاشة للتمرير دون فتح النتائج.</label>
@@ -160,6 +394,28 @@ body.focus-reading #quickScroller:hover, body.focus-reading #quickScroller:focus
  </div>
  </div></section></div>
 <div class="scroll-float" id="scrollFloat"><button id="floatScroll">▶ تمرير</button><button id="floatTools">⚙ خيارات</button><button id="exitFocus" hidden>✕ خروج</button></div>
+
+<!-- شفّاف مثل AssistiveTouch: يفتح لوحة تحكم تضم جميع الخيارات الأصلية -->
+<button id="assistiveOrb" type="button" aria-label="فتح خيارات المصحف" aria-expanded="false" aria-controls="assistiveScrim" title="اضغط لفتح خيارات القراءة، أو اسحب لتحريك الزر">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.25">
+<path d="M10 21c0-9 6-15 14-15 9 0 15 6 15 15"/><path d="M6 22C6 10 14 3 24 3c11 0 18 8 18 19"/><path d="M13 24c0-7 4-11 11-11s11 5 11 12c0 8-2 14-6 19"/><path d="M19 22c0-4 2-6 5-6s6 3 6 7c0 11-3 17-7 22"/><path d="M24 22c0 7-1 14-5 21"/><path d="M11 30c.4 5 1 8 3 12"/><path d="M37 30c-1 6-3 10-6 14"/>
+</svg></button>
+<div id="assistiveScrim" class="assistive-scrim" hidden>
+ <section class="assistive-sheet" role="dialog" aria-modal="true" aria-label="خيارات مصحف بصائر" dir="rtl">
+  <div class="assistive-heading"><div><strong>خيارات مصحف بصائر</strong><small>الإعدادات تظهر هنا فقط، والصفحات تبقى واضحة أثناء القراءة</small></div><button id="closeAssistive" type="button" aria-label="إغلاق الخيارات">✕</button></div>
+  <div id="assistiveModeSlot" class="assistive-mode-slot"></div>
+  <div class="assistive-shortcuts">
+   <button id="twoPageToggle" class="assistive-spread-btn" type="button" aria-pressed="false"><span aria-hidden="true">▣</span> عرض وجهين جنب بعض</button>
+   <button id="assistiveQuickScroll" class="assistive-fast-btn" type="button">▶ التمرير</button>
+  </div>
+  <div class="assistive-group-title">التخطيط والخط وأدوات القراءة</div>
+  <div id="assistiveToolbarSlot"></div>
+  <div class="assistive-group-title">البحث والإعدادات المتقدمة</div>
+  <div id="assistiveActions" class="assistive-actions"></div>
+  <p class="assistive-hint" id="assistiveSpreadHint">في الوضع الأفقي يظهر الوجهان جنبًا إلى جنب. في الشاشة الضيقة يظهران تباعًا حفاظًا على وضوح الكتابة.</p>
+ </section>
+</div>
+
 <div class="toast" id="toast" role="status"></div>
 <script>
 'use strict';
@@ -179,13 +435,13 @@ const ar=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[Number(d)]);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>String(s||'').replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u08D3-\u08FF]/g,'').replace(/[ٱأإآ]/g,'ا').replace(/ى/g,'ي').replace(/\u200c|\u200d/g,'').replace(/[﴿﴾۞۝\u06DD\u0600-\u0605\u060C\u061B\u061F.,،؛؟!()\[\]{}]/g,'').trim();
 const fallback=FALLBACK_TEXT.map((t,i)=>({s:1,a:i+1,t,p:1,j:1}));
-const state={verses:fallback,byPage:new Map(),bySurah:new Map(),index:new Map(),segments:[],segByIndex:[],surahs:[{n:1,name:'الفاتحة',count:7,rev:'Meccan'}],complete:false,page:1,verseIndex:0,segment:0,mode:'qiyam',layout:'madina',font:34,qiyamFont:17,night:false,theme:"light",wordTap:true,readFont:"amiri",lineHeight:2.2,wordSpacing:2,readWidth:1510,scrollSpeed:20,scienceCache:new Map(),verseView:'tafsir',currentScienceId:null,zilalDB:null,autoScroll:false,autoFrame:null,lastFrame:0,focus:false,selectedWord:null,focusedIndex:null,hidden:true,revealed:new Set(),resultIndices:[],shown:0,searchResults:[],searchShown:0,searchTerm:'',panelType:null,awake:null,bookmarks:[],memorized:{},notes:{}};
+const state={verses:fallback,byPage:new Map(),bySurah:new Map(),index:new Map(),segments:[],segByIndex:[],surahs:[{n:1,name:'الفاتحة',count:7,rev:'Meccan'}],complete:false,page:1,verseIndex:0,segment:0,mode:'qiyam',layout:'madina',font:34,qiyamFont:23,night:false,theme:"light",wordTap:true,readFont:"amiri",lineHeight:2.2,wordSpacing:2,readWidth:1510,scrollSpeed:20,paperWidth:630,spread:false,continuous:false,flowStart:0,flowEnd:0,flowLastY:0,flowTracking:false,flowTimer:null,scienceCache:new Map(),verseView:'tafsir',currentScienceId:null,zilalDB:null,autoScroll:false,autoFrame:null,lastFrame:0,autoTargetY:0,autoObservedY:0,focus:false,selectedWord:null,focusedIndex:null,hidden:true,revealed:new Set(),resultIndices:[],shown:0,searchResults:[],searchShown:0,searchTerm:'',panelType:null,awake:null,bookmarks:[],memorized:{},notes:{}};
 const key=(s,a)=>s+':'+a;
 function readLocal(k,d){try{const x=localStorage.getItem('basaer_'+k);return x===null?d:JSON.parse(x)}catch{return d}}
 function saveLocal(k,val){try{localStorage.setItem('basaer_'+k,JSON.stringify(val));return true}catch{return false}}
 function toast(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),3600)}
-function initPrefs(){const pref=readLocal('prefs',{});state.layout=pref.layout||'madina';state.mode=pref.mode||'qiyam';state.font=Number(pref.font)||34;state.qiyamFont=Number(pref.qiyamFont)||17;state.theme=pref.theme||(pref.night?'dark':'light');state.night=state.theme==='dark';state.wordTap=pref.wordTap!==false;state.readFont=pref.readFont||'amiri';state.lineHeight=Number(pref.lineHeight)||2.2;state.wordSpacing=Number.isFinite(Number(pref.wordSpacing))?Number(pref.wordSpacing):2;state.readWidth=Number(pref.readWidth)||1510;state.scrollSpeed=Number(pref.scrollSpeed)||20;state.bookmarks=readLocal('bookmarks',[]);state.notes=readLocal('notes',{});state.memorized=readLocal('memorized',{});state.hidden=pref.hidden!==false;state.savedPosition=readLocal('position',null);}
-function savePrefs(){saveLocal('prefs',{layout:state.layout,mode:state.mode,font:state.font,qiyamFont:state.qiyamFont,night:state.night,theme:state.theme,wordTap:state.wordTap,readFont:state.readFont,lineHeight:state.lineHeight,wordSpacing:state.wordSpacing,readWidth:state.readWidth,scrollSpeed:state.scrollSpeed,hidden:state.hidden})}
+function initPrefs(){const pref=readLocal('prefs',{});state.layout=['madina','paper','qiyam'].includes(pref.layout)?pref.layout:'madina';state.paperWidth=Math.max(390,Math.min(820,Number(pref.paperWidth)||630));state.spread=pref.spread===true;state.mode=pref.mode||'qiyam';state.font=Number(pref.font)||34;state.qiyamFont=Math.max(21,Number(pref.qiyamFont)||23);state.theme=pref.theme||(pref.night?'dark':'light');state.night=state.theme==='dark';state.wordTap=pref.wordTap!==false;state.readFont=pref.readFont||'amiri';state.lineHeight=Number(pref.lineHeight)||2.2;state.wordSpacing=Number.isFinite(Number(pref.wordSpacing))?Number(pref.wordSpacing):2;state.readWidth=Number(pref.readWidth)||1510;state.scrollSpeed=Number(pref.scrollSpeed)||20;state.continuous=pref.continuous===true;state.bookmarks=readLocal('bookmarks',[]);state.notes=readLocal('notes',{});state.memorized=readLocal('memorized',{});state.hidden=pref.hidden!==false;state.savedPosition=readLocal('position',null);}
+function savePrefs(){saveLocal('prefs',{layout:state.layout,paperWidth:state.paperWidth,spread:state.spread,mode:state.mode,font:state.font,qiyamFont:state.qiyamFont,night:state.night,theme:state.theme,wordTap:state.wordTap,readFont:state.readFont,lineHeight:state.lineHeight,wordSpacing:state.wordSpacing,readWidth:state.readWidth,scrollSpeed:state.scrollSpeed,continuous:state.continuous,hidden:state.hidden})}
 function indexQuran(){
  state.byPage=new Map();state.bySurah=new Map();state.index=new Map();state.segments=[];state.segByIndex=[];
  state.verses.forEach((v,i)=>{
@@ -229,14 +485,14 @@ function indexQuran(){
 }
 function surahName(n){return state.surahs.find(s=>s.n===n)?.name||String(n)}
 function populateSurahs(){const list=state.surahs.map(s=>`<option value="${s.n}">${ar(s.n)} · ${esc(s.name)}</option>`).join('');$('surahSelect').innerHTML=list;$('surahSettings').innerHTML=list}
-function applyPrefs(){document.body.classList.toggle('night',state.theme==='dark');document.body.classList.toggle('sepia',state.theme==='sepia');document.body.classList.toggle('words-off',!state.wordTap);document.body.classList.toggle('words-on',state.wordTap);document.body.classList.toggle('focus-reading',state.focus);document.documentElement.style.setProperty('--read-line',String(state.lineHeight));document.documentElement.style.setProperty('--words-gap',state.wordSpacing+'px');document.documentElement.style.setProperty('--reader-width',state.readWidth+'px');document.documentElement.style.setProperty('--read-font',state.readFont==='naskh'?'"Noto Naskh Arabic","Amiri",serif':state.readFont==='traditional'?'"Traditional Arabic","Amiri",serif':'"Amiri","Noto Naskh Arabic",serif');$('wordTapToggle').checked=state.wordTap;$('accessWordTap').checked=state.wordTap;document.body.classList.toggle('layout-qiyam',state.layout==='qiyam');document.body.classList.toggle('layout-madina',state.layout==='madina');for(const cls of ['mode-qiyam','mode-hifz','mode-tadabbur'])document.body.classList.remove(cls);document.body.classList.add('mode-'+state.mode);const size=state.layout==='qiyam'?state.qiyamFont:state.font;document.documentElement.style.setProperty('--qsize',size+'px');$('fontSize').min=state.layout==='qiyam'?12:25;$('fontSize').max=state.layout==='qiyam'?28:62;$('fontSize').value=size;$('fontNumber').textContent=ar(size);document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('active',b.dataset.mode===state.mode);b.setAttribute('aria-pressed',b.dataset.mode===state.mode)});document.querySelectorAll('[data-layout]').forEach(b=>{b.classList.toggle('active',b.dataset.layout===state.layout);b.setAttribute('aria-pressed',b.dataset.layout===state.layout)});$('themeBtn').textContent=state.theme==='dark'?'☀ الوضع النهاري':'◐ الوضع الليلي';$('hideToggle').classList.toggle('active',state.hidden);$('hideToggle').textContent=state.hidden?'▨ إخفاء الآيات':'□ إظهار الآيات';}
+function applyPrefs(){document.body.classList.toggle('night',state.theme==='dark');document.body.classList.toggle('sepia',state.theme==='sepia');document.body.classList.toggle('words-off',!state.wordTap);document.body.classList.toggle('words-on',state.wordTap);document.body.classList.toggle('focus-reading',state.focus);document.body.classList.toggle('flow-reading',state.continuous);document.body.classList.toggle('spread-two',state.spread);document.documentElement.style.setProperty('--read-line',String(state.lineHeight));document.documentElement.style.setProperty('--words-gap',state.wordSpacing+'px');document.documentElement.style.setProperty('--reader-width',state.readWidth+'px');document.documentElement.style.setProperty('--read-font',state.readFont==='naskh'?'"Noto Naskh Arabic","Amiri",serif':state.readFont==='traditional'?'"Traditional Arabic","Amiri",serif':'"Amiri","Noto Naskh Arabic",serif');$('wordTapToggle').checked=state.wordTap;$('accessWordTap').checked=state.wordTap;document.body.classList.toggle('layout-qiyam',state.layout==='qiyam');document.body.classList.toggle('layout-madina',state.layout==='madina');document.body.classList.toggle('layout-paper',state.layout==='paper');document.documentElement.style.setProperty('--paper-width',state.paperWidth+'px');for(const cls of ['mode-qiyam','mode-hifz','mode-tadabbur'])document.body.classList.remove(cls);document.body.classList.add('mode-'+state.mode);const size=state.layout==='qiyam'?state.qiyamFont:state.font;document.documentElement.style.setProperty('--qsize',size+'px');$('fontSize').min=state.layout==='qiyam'?21:25;$('fontSize').max=state.layout==='qiyam'?38:62;$('fontSize').value=size;$('fontNumber').textContent=state.layout==='paper'?'ثابت':ar(size);$('fontSize').disabled=state.layout==='paper';document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('active',b.dataset.mode===state.mode);b.setAttribute('aria-pressed',b.dataset.mode===state.mode)});document.querySelectorAll('[data-layout]').forEach(b=>{b.classList.toggle('active',b.dataset.layout===state.layout);b.setAttribute('aria-pressed',b.dataset.layout===state.layout)});$('themeBtn').textContent=state.theme==='dark'?'☀ الوضع النهاري':'◐ الوضع الليلي';$('hideToggle').classList.toggle('active',state.hidden);$('hideToggle').textContent=state.hidden?'▨ إخفاء الآيات':'□ إظهار الآيات';$('flowToggle').classList.toggle('active',state.continuous);$('flowToggle').setAttribute('aria-pressed',String(state.continuous));}
 function surahMeta(n){return state.surahs.find(s=>s.n===n)||{n,name:surahName(n),count:n===1?7:null,rev:n===1?'Meccan':null}}
 function surahBanner(n){const x=surahMeta(n),header=document.createElement('div');header.className='surah-banner';const h=document.createElement('h2');h.textContent='﴿ سُورَةُ '+x.name+' ﴾';const facts=document.createElement('div');facts.className='surah-facts';const vals=['رقم '+ar(n),x.count?'عدد الآيات: '+ar(x.count):'عدد الآيات: غير محمّل',x.rev==='Meccan'?'مكية':x.rev==='Medinan'?'مدنية':'النوع: غير محمّل'];for(const t of vals){const el=document.createElement('span');el.textContent=t;facts.append(el)}header.append(h,facts);return header}
 function showSurahHead(target,s){target.append(surahBanner(s))}
 function showBasmala(target){const b=document.createElement('div');b.className='bismillah';b.textContent=BASMALA;target.append(b)}
 function renderVerseWords(container,v,i){const span=document.createElement('span');span.className='verse-text';const pieces=v.t.match(/\S+|\s+/g)||[];for(const piece of pieces){if(/^\s+$/.test(piece)){span.appendChild(document.createTextNode(piece));continue}const w=document.createElement('span');w.className='word';w.textContent=piece;w.dataset.word=norm(piece);if(state.selectedWord&&norm(piece)===state.selectedWord)w.classList.add('hit');w.addEventListener('click',e=>{e.stopPropagation();if(state.mode==='hifz'&&state.hidden&&!state.revealed.has(i)){state.revealed.add(i);render();return}if(!state.wordTap)return;openWord(piece)});span.appendChild(w)}container.appendChild(span)}
 function renderVerse(target,i){const v=state.verses[i];const span=document.createElement('span');span.className='verse'+(state.focusedIndex===i?' focus':'');span.id='v-'+i;span.dataset.i=i;if(state.mode==='hifz'&&state.hidden&&!state.revealed.has(i))span.classList.add('masked');renderVerseWords(span,v,i);span.appendChild(document.createTextNode(' '));const number=document.createElement('button');number.type='button';number.className='verse-number';number.textContent=ar(v.a);number.title='تفاصيل وملاحظات الآية '+v.s+':'+v.a;number.setAttribute('aria-label','تفاصيل الآية '+v.s+':'+v.a);number.onclick=e=>{e.stopPropagation();state.verseIndex=i;state.focusedIndex=i;savePosition();openVersePanel(i)};span.appendChild(number);span.appendChild(document.createTextNode(' '));span.addEventListener('click',e=>{if(state.mode==='hifz'&&span.classList.contains('masked')){state.revealed.add(i);render()}});target.append(span);target.appendChild(document.createTextNode(' '));}
-function render(){applyPrefs();const root=$('verses');root.replaceChildren();const isQ=state.layout==='qiyam';let inds=[];
+function legacyRender(){applyPrefs();if(state.continuous){renderContinuous();return}$('pageNum').disabled=false;$('flowLabel').textContent='وضع الصفحات';const root=$('verses');root.replaceChildren();const isQ=state.layout==='qiyam';let inds=[];
  if(isQ){state.segment=state.segByIndex[state.verseIndex]||0;const seg=state.segments[state.segment];inds=seg?Array.from({length:seg.end-seg.start},(_,k)=>seg.start+k):[]}
  else{inds=state.byPage.get(state.page)||[]}
  if(!inds.length){root.textContent='لا توجد آيات في هذا الموضع ضمن البيانات الحالية.';return}
@@ -245,17 +501,123 @@ function render(){applyPrefs();const root=$('verses');root.replaceChildren();con
  $('readerTip').textContent=state.mode==='qiyam'?'صفحة القيام تجمع نحو خمس صفحات من مصحف المدينة. مرِّر داخل الصفحة عند الحاجة ثم انتقل للوجه التالي.':state.mode==='hifz'?'اضغط على الآيات المخفية لكشفها، أو على رقم الآية لفتح سجل الحفظ.':(state.wordTap?'اضغط على أي كلمة لعرض جميع مواضعها، أو على رقم الآية لإضافة ملاحظة شخصية.':'الضغط على الكلمات متوقف، والبحث اليدوي متاح من أعلى المصحف.');
  if(state.panelType==='word')$('panelSubtitle').textContent=state.complete?'نتائج البحث في القرآن كاملًا':'نتائج مقتصرة على البيانات المحمّلة';
 }
+
+// The stream follows the exact verse order of the loaded Quran; only layout changes.
+// Render bounded chunks for tablet performance. Append next verses before reaching their edge.
+const FLOW_BATCH=72;
+function flowAddBatch(start,end,atTop=false){
+ const root=$('verses');if(start>=end)return;
+ const fragment=document.createDocumentFragment();
+ for(let i=start;i<end;i++){
+  const v=state.verses[i];
+  if(v.a===1){showSurahHead(fragment,v.s);if(v.s!==1&&v.s!==9)showBasmala(fragment)}
+  renderVerse(fragment,i);
+ }
+ if(atTop){
+  const oldHeight=document.documentElement.scrollHeight;
+  const oldY=window.scrollY;
+  root.prepend(fragment);
+  const delta=document.documentElement.scrollHeight-oldHeight;
+  window.scrollTo({top:oldY+delta,behavior:'instant'});
+ }else root.append(fragment);
+}
+function legacyUpdateFlowPosition(){
+ if(!state.continuous||!state.verses.length)return;
+ const rect=document.querySelector('.mushaf').getBoundingClientRect();
+ const y=Math.min(window.innerHeight-90,Math.max(165,rect.top+135));
+ const x=rect.left+rect.width*.5;
+ let found=document.elementFromPoint(x,y)?.closest('.verse');
+ if(!found){
+  const verses=$('verses').querySelectorAll('.verse');
+  for(const el of verses){const b=el.getBoundingClientRect();if(b.bottom>125){found=el;break}}
+ }
+ if(found){const i=Number(found.dataset.i);if(Number.isInteger(i)&&i>=0&&i<state.verses.length&&i!==state.verseIndex){
+  state.verseIndex=i;state.page=state.verses[i].p;state.segment=state.segByIndex[i]||0;
+  const v=state.verses[i];$('chapterLabel').textContent='سورة '+surahName(v.s);
+  $('juzLabel').textContent='الجزء '+ar(v.j);$('pageLabel').textContent='آية '+ar(v.a);
+  $('underPage').textContent='سورة '+surahName(v.s)+' · الآية '+ar(v.a);
+  $('bottomPage').textContent=surahName(v.s)+' · '+ar(v.a);
+  $('surahSelect').value=v.s;
+  savePosition();
+ }}
+}
+function legacyFlowEnsureContent(){
+ if(!state.continuous)return;
+ const root=$('verses');if(!root.firstChild)return;
+ const b=root.getBoundingClientRect();
+ const nearBottom=b.bottom-window.innerHeight<1400;
+ if(nearBottom&&state.flowEnd<state.verses.length){
+  const start=state.flowEnd;const end=Math.min(state.verses.length,start+FLOW_BATCH);
+  flowAddBatch(start,end);state.flowEnd=end;
+ }
+ const movingUp=window.scrollY<state.flowLastY-1;
+ if(movingUp&&b.top>-800&&state.flowStart>0){
+  const old=state.flowStart;const start=Math.max(0,old-FLOW_BATCH);
+  flowAddBatch(start,old,true);state.flowStart=start;
+ }
+ state.flowLastY=window.scrollY;
+}
+function legacyRenderContinuous(){
+ const root=$('verses');const target=Math.max(0,Math.min(state.verses.length-1,state.verseIndex));
+ root.replaceChildren();$('pageSurahBanner').replaceChildren();
+ if(!state.verses.length){root.textContent='لم يتم تحميل الآيات بعد.';return}
+ // Include a few earlier verses so reading can scroll upward naturally.
+ const start=Math.max(0,target-18),end=Math.min(state.verses.length,target+FLOW_BATCH);
+ state.flowStart=start;state.flowEnd=end;
+ flowAddBatch(start,end);
+ const first=state.verses[target];
+ $('chapterLabel').textContent='سورة '+surahName(first.s);
+ $('juzLabel').textContent='الجزء '+ar(first.j);
+ $('pageLabel').textContent='قراءة متصلة';
+ $('pageFoot').textContent='';
+ $('navCount').textContent='السورة';
+ $('pageNum').disabled=true;
+ $('prevBtn').disabled=$('mobilePrev').disabled=$('underPrev').disabled=first.s===1;
+ $('nextBtn').disabled=$('mobileNext').disabled=$('underNext').disabled=first.s===114;
+ $('prevBtn').textContent=$('mobilePrev').textContent=$('underPrev').textContent='❯ السورة السابقة';
+ $('nextBtn').textContent=$('mobileNext').textContent=$('underNext').textContent='السورة التالية ❮';
+ $('bottomPage').textContent='سورة '+surahName(first.s)+' · آية '+ar(first.a);
+ $('underPage').textContent='سورة '+surahName(first.s)+' · آية '+ar(first.a);
+ $('surahSelect').value=first.s;
+ $('readerTip').textContent='الآيات متصلة بلا فواصل صفحات. يمكنك التمرير يدويًا أو تلقائيًا، وسيُحمَّل النص التالي أثناء القراءة.';
+ $('flowLabel').textContent='قراءة متصلة';
+ // Scroll to the selected ayah, not to the start of a Madina or Qiyam page.
+ document.getElementById('v-'+target)?.scrollIntoView({block:'start',behavior:'instant'});
+ state.flowLastY=window.scrollY;
+ requestAnimationFrame(flowEnsureContent);
+}
+function setContinuous(on){
+ const enabled=Boolean(on);if(state.continuous===enabled)return;
+ if(!enabled&&state.autoScroll)pauseScroll();
+ if(state.continuous)updateFlowPosition();
+ state.continuous=enabled;savePrefs();
+ $('pageNum').disabled=enabled;
+ if(!enabled){
+  $('prevBtn').textContent=$('mobilePrev').textContent=$('underPrev').textContent='❯ السابق';
+  $('nextBtn').textContent=$('mobileNext').textContent=$('underNext').textContent='التالي ❮';
+  $('flowLabel').textContent='وضع الصفحات';
+ }
+ render();syncReadingTools();
+ toast(enabled?'القراءة المتصلة: الآيات تتابع بلا توقف عند الصفحات':'العودة إلى نظام صفحات المصحف');
+}
+function onFlowWindowScroll(){
+ if(!state.continuous)return;
+ flowEnsureContent();
+ if(state.flowTimer!==null)clearTimeout(state.flowTimer);
+ state.flowTimer=setTimeout(()=>{state.flowTimer=null;updateFlowPosition()},200);
+}
+
 function savePosition(){const v=state.verses[state.verseIndex]||state.verses[0];if(v){saveLocal('position',{s:v.s,a:v.a});$('personalStatus').textContent='موضعك المحفوظ: '+surahName(v.s)+' — آية '+ar(v.a)}}
-function setVerseIndex(i,scroll){pauseScroll();i=Math.max(0,Math.min(state.verses.length-1,i));state.verseIndex=i;state.page=state.verses[i].p;state.focusedIndex=i;state.segment=state.segByIndex[i]||0;state.selectedWord=null;closePanel(false);savePosition();render();if(scroll){window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>{if(state.layout==='madina')$('v-'+i)?.scrollIntoView({block:'nearest',behavior:'smooth'})},150)}}
-function nav(delta){if(state.layout==='madina'){const p=state.page+delta;if(p<1||p>604)return;const inds=state.byPage.get(p);if(!inds){toast(state.complete?'الصفحة غير متاحة في البيانات الحالية':'حمّل النص الكامل أولًا من الإنترنت.');return}setVerseIndex(inds[0],true)}else{const s=state.segment+delta;if(s<0||s>=state.segments.length)return;setVerseIndex(state.segments[s].start,true)}}
-function navInput(){const n=Number($('pageNum').value);if(!Number.isInteger(n)){toast('أدخل رقمًا صحيحًا');render();return}if(state.layout==='madina'){const arr=state.byPage.get(n);if(!arr){toast('الصفحة غير متاحة الآن.');render();return}setVerseIndex(arr[0],true)}else{const seg=state.segments[n-1];if(!seg){toast('رقم المقطع غير صحيح');render();return}setVerseIndex(seg.start,true)}}
-function changeMode(mode){if(!['qiyam','hifz','tadabbur'].includes(mode))return;state.mode=mode;state.selectedWord=null;if(mode==='qiyam')closePanel(false);savePrefs();render()}
-function changeLayout(layout){state.layout=layout;state.selectedWord=null;closePanel(false);savePrefs();render();syncReadingTools();toast(layout==='madina'?'تخطيط صفحات المدينة — ٦٠٤ صفحات':'تخطيط القيام — ٤ أوجه طويلة لكل جزء (١٢٠ وجهًا)')}
+function setVerseIndex(i,scroll){pauseScroll();i=Math.max(0,Math.min(state.verses.length-1,i));state.verseIndex=i;state.page=state.verses[i].p;state.focusedIndex=i;state.segment=state.segByIndex[i]||0;state.selectedWord=null;closePanel(false);savePosition();render();if(scroll){if(state.continuous){document.getElementById('v-'+i)?.scrollIntoView({block:'start',behavior:'instant'});}else{window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>{if(state.layout==='madina')$('v-'+i)?.scrollIntoView({block:'nearest',behavior:'smooth'})},150)}}}
+function legacyNav(delta){if(state.continuous){const current=state.verses[state.verseIndex];const next=state.surahs.find(s=>s.n===current.s+delta);if(next)setSurah(next.n);else toast('وصلت إلى أول أو آخر سورة في المصحف');return}if(state.layout==='madina'){const p=state.page+delta;if(p<1||p>604)return;const inds=state.byPage.get(p);if(!inds){toast(state.complete?'الصفحة غير متاحة في البيانات الحالية':'حمّل النص الكامل أولًا من الإنترنت.');return}setVerseIndex(inds[0],true)}else{const s=state.segment+delta;if(s<0||s>=state.segments.length)return;setVerseIndex(state.segments[s].start,true)}}
+function legacyNavInput(){if(state.continuous)return;const n=Number($('pageNum').value);if(!Number.isInteger(n)){toast('أدخل رقمًا صحيحًا');render();return}if(state.layout==='madina'){const arr=state.byPage.get(n);if(!arr){toast('الصفحة غير متاحة الآن.');render();return}setVerseIndex(arr[0],true)}else{const seg=state.segments[n-1];if(!seg){toast('رقم المقطع غير صحيح');render();return}setVerseIndex(seg.start,true)}}
+function changeMode(mode){if(state.continuous)updateFlowPosition();if(!['qiyam','hifz','tadabbur'].includes(mode))return;state.mode=mode;state.selectedWord=null;if(mode==='qiyam')closePanel(false);savePrefs();render()}
+function changeLayout(layout){if(!['madina','paper','qiyam'].includes(layout))return;if(state.autoScroll)pauseScroll();if(state.continuous)updateFlowPosition();state.layout=layout;if(layout==='qiyam'){state.continuous=false;state.qiyamFont=Math.max(21,Math.min(38,Number(state.qiyamFont)||23))}state.selectedWord=null;closePanel(false);savePrefs();render();syncReadingTools();toast(layout==='paper'?'المصحف الورقي: صور الصفحات الأصلية للقراءة فقط':layout==='madina'?'صفحات المدينة التفاعلية — ٦٠٤ صفحة':'تخطيط القيام — ٤ أوجه طويلة لكل جزء (١٢٠ وجهًا)')}
 function openPanel(title,subtitle,type){if(state.autoScroll)pauseScroll();state.panelType=type;$('panelTitle').textContent=title;$('panelSubtitle').textContent=subtitle;$('panel').hidden=false;$('readerLayout').classList.add('with-panel')}
-function closePanel(reRender=true){state.currentScienceId=null;$('panel').hidden=true;$('readerLayout').classList.remove('with-panel');state.panelType=null;state.selectedWord=null;if(reRender)render()}
+function closePanel(reRender=true){state.currentScienceId=null;$('panel').hidden=true;$('readerLayout').classList.remove('with-panel');state.panelType=null;state.selectedWord=null;if(reRender){if(state.continuous){document.querySelectorAll('#verses .word.hit').forEach(w=>w.classList.remove('hit'));}else render()}}
 function resultNode(v,i,term){const item=document.createElement('div');item.className='result';const head=document.createElement('h4');head.innerHTML=`<span>${esc(surahName(v.s))} · الآية ${ar(v.a)}</span><span>ص ${ar(v.p)}</span>`;item.append(head);const words=document.createElement('div');words.className='res-text';for(const piece of (v.t.match(/\S+|\s+/g)||[])){if(/^\s+$/.test(piece)){words.appendChild(document.createTextNode(piece));continue}if(term&&norm(piece).includes(term)){const m=document.createElement('mark');m.textContent=piece;words.appendChild(m)}else words.appendChild(document.createTextNode(piece))}item.append(words);const go=document.createElement('button');go.type='button';go.className='go-link';go.textContent='الانتقال إلى الآية داخل المصحف';go.onclick=()=>{['searchOverlay'].forEach(id=>$(id).hidden=true);setVerseIndex(i,true)};item.append(go);return item}
 function renderWordBatch(){const body=$('panelContent');if(state.shown===0)body.replaceChildren();if(!state.resultIndices.length){body.textContent='لا يوجد تطابق في البيانات المتاحة.';return}const end=Math.min(state.shown+12,state.resultIndices.length);for(let n=state.shown;n<end;n++){const idx=state.resultIndices[n];body.append(resultNode(state.verses[idx],idx,state.selectedWord))}state.shown=end;if(end<state.resultIndices.length){const more=document.createElement('button');more.className='load-more';more.textContent='عرض المزيد — '+ar(end)+' من '+ar(state.resultIndices.length);more.onclick=()=>{more.remove();renderWordBatch()};body.append(more)}}
-function openWord(raw){if(state.autoScroll)pauseScroll();const term=norm(raw);if(!term)return;state.selectedWord=term;state.resultIndices=state.index.get(term)||[];state.shown=0;openPanel('مواضع كلمة «'+raw+'»','نتائج داخل نفس شاشة المصحف','word');const s=document.createElement('div');s.className='results-summary';const n=state.resultIndices.length;const occurrences=state.resultIndices.reduce((sum,i)=>sum+(state.verses[i].t.match(/\S+/g)||[]).filter(w=>norm(w)===term).length,0);s.textContent=ar(n)+' آية · '+ar(occurrences)+' موضع'+(state.complete?' في القرآن كله':' في العينة الحالية فقط');$('panelContent').replaceChildren(s);state.shown=0;const holder=document.createElement('div');holder.id='resultHolder';$('panelContent').append(holder);renderWordBatchIn(holder);render()}
+function openWord(raw){if(state.autoScroll)pauseScroll();const term=norm(raw);if(!term)return;state.selectedWord=term;state.resultIndices=state.index.get(term)||[];state.shown=0;openPanel('مواضع كلمة «'+raw+'»','نتائج داخل نفس شاشة المصحف','word');const s=document.createElement('div');s.className='results-summary';const n=state.resultIndices.length;const occurrences=state.resultIndices.reduce((sum,i)=>sum+(state.verses[i].t.match(/\S+/g)||[]).filter(w=>norm(w)===term).length,0);s.textContent=ar(n)+' آية · '+ar(occurrences)+' موضع'+(state.complete?' في القرآن كله':' في العينة الحالية فقط');$('panelContent').replaceChildren(s);state.shown=0;const holder=document.createElement('div');holder.id='resultHolder';$('panelContent').append(holder);renderWordBatchIn(holder);if(state.continuous){document.querySelectorAll('#verses .word').forEach(w=>w.classList.toggle('hit',w.dataset.word===term))}else render()}
 function renderWordBatchIn(holder){const end=Math.min(state.shown+12,state.resultIndices.length);if(state.shown===0&&!state.resultIndices.length)holder.textContent='لم توجد آيات مطابقة في البيانات الحالية.';for(let n=state.shown;n<end;n++){const i=state.resultIndices[n];holder.append(resultNode(state.verses[i],i,state.selectedWord))}state.shown=end;if(end<state.resultIndices.length){const more=document.createElement('button');more.className='load-more';more.textContent='عرض المزيد ('+ar(state.resultIndices.length-end)+')';more.onclick=()=>{more.remove();renderWordBatchIn(holder)};holder.append(more)}}
 // All scientific material stays inside the current mushaf page.
 // Quranpedia API provides verse-indexed tafsir and asbab, no token required.
@@ -283,7 +645,7 @@ function openVersePanel(i){
  for(const [id,name] of views){const b=document.createElement('button');b.type='button';b.className='science-tab'+(id==='tafsir'?' active':'');b.dataset.science=id;b.textContent=name;b.setAttribute('role','tab');b.onclick=()=>{if(state.currentScienceId!==k)return;state.verseView=id;for(const other of tabs.children)other.classList.toggle('active',other===b);renderScienceTab(v,body,id)};tabs.append(b)}
  content.append(tabs,body);
  renderScienceTab(v,body,'tafsir');
- render();
+ if(!state.continuous)render();
 }
 async function renderScienceTab(v,body,tab){
  const id=key(v.s,v.a);body.replaceChildren();const stamp=id+':'+tab;
@@ -346,13 +708,14 @@ async function bulkStoreZilal(records){const db=await openZilalDb();return new P
 function openSearch(){$('searchOverlay').hidden=false;$('searchInput').focus()}
 function searchNow(){const input=norm($('searchInput').value);const root=$('searchResults');root.replaceChildren();if(!input){root.textContent='اكتب كلمة للبحث.';return}state.searchTerm=input;let hits=[];if(input.includes(' ')){hits=state.verses.map((v,i)=>norm(v.t).includes(input)?i:-1).filter(i=>i>=0)}else{hits=state.verses.map((v,i)=>(v.t.match(/\S+/g)||[]).some(w=>norm(w).includes(input))?i:-1).filter(i=>i>=0)}state.searchResults=hits;state.searchShown=0;const summary=document.createElement('p');summary.className='results-summary';summary.textContent=ar(hits.length)+' نتيجة'+(state.complete?' في القرآن الكريم':' في عينة الفاتحة فقط؛ يحتاج البحث الكامل لاتصال أول مرة');root.append(summary);renderSearchBatch()}
 function renderSearchBatch(){const root=$('searchResults');const end=Math.min(state.searchShown+14,state.searchResults.length);for(let n=state.searchShown;n<end;n++){const idx=state.searchResults[n];root.append(resultNode(state.verses[idx],idx,state.searchTerm))}state.searchShown=end;if(end<state.searchResults.length){const more=document.createElement('button');more.className='load-more';more.textContent='عرض المزيد';more.onclick=()=>{more.remove();renderSearchBatch()};root.append(more)}}
-function setSurah(n){const arr=state.bySurah.get(Number(n));if(!arr?.length){toast('السورة غير متاحة قبل تحميل القرآن كاملًا');return}setVerseIndex(arr[0],true);['settingsOverlay'].forEach(id=>$(id).hidden=true)}
+function legacySetSurah(n){const arr=state.bySurah.get(Number(n));if(!arr?.length){toast('السورة غير متاحة قبل تحميل القرآن كاملًا');return}setVerseIndex(arr[0],true);['settingsOverlay'].forEach(id=>$(id).hidden=true)}
 function showBookmarks(){const root=$('bookmarksList');root.replaceChildren();const list=state.bookmarks;if(!list.length){root.textContent='لم تضع علامات بعد. اضغط ☆ علامة عند الموضع الذي تريد حفظه.'}else{list.forEach((p,idx)=>{const el=document.createElement('div');el.className='bookmark';const name=document.createElement('span');name.textContent=surahName(p.s)+' · آية '+ar(p.a);const go=document.createElement('button');go.textContent='اذهب';go.onclick=()=>{const arr=state.bySurah.get(p.s)||[];const i=arr.find(i=>state.verses[i].a===p.a);if(i!==undefined){$('bookmarksOverlay').hidden=true;setVerseIndex(i,true)}else toast('هذا الموضع غير محمّل حاليًا')};const rm=document.createElement('button');rm.textContent='حذف';rm.onclick=()=>{state.bookmarks.splice(idx,1);saveLocal('bookmarks',state.bookmarks);showBookmarks()};el.append(name,go,rm);root.append(el)})}$('bookmarksOverlay').hidden=false}
 function addBookmark(){const v=state.verses[state.verseIndex];if(!v)return;const found=state.bookmarks.some(x=>x.s===v.s&&x.a===v.a);if(found){toast('الآية موجودة بالفعل في علاماتك');return}state.bookmarks.push({s:v.s,a:v.a});saveLocal('bookmarks',state.bookmarks);toast('☆ تم وضع علامة عند سورة '+surahName(v.s)+' الآية '+ar(v.a))}
 async function keepAwake(){try{if(state.awake){await state.awake.release();state.awake=null;$('wakeBtn').classList.remove('active');toast('تم إيقاف إبقاء الشاشة مضاءة');return}if(!('wakeLock' in navigator)){toast('المتصفح لا يدعم إبقاء الشاشة مضاءة من هذا الملف. اضبط مهلة الشاشة من إعدادات التابلت.');return}state.awake=await navigator.wakeLock.request('screen');$('wakeBtn').classList.add('active');state.awake.addEventListener('release',()=>{$('wakeBtn').classList.remove('active');state.awake=null});toast('تم تفعيل إبقاء الشاشة مضاءة ما دام المتصفح يسمح بذلك')}catch(e){toast('لم يتم السماح بإبقاء الشاشة مضاءة. جرّب فتح التطبيق عبر HTTPS أو غيّر إعدادات الجهاز.') }}
 async function fullScreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{toast('ملء الشاشة غير متاح في هذا المتصفح أو من ملف محلي')}}
 
 function syncReadingTools(){
+ if($('toolbarScrollBtn')){$('toolbarScrollBtn').textContent=state.autoScroll?'⏸ إيقاف التمرير':'▶ التمرير التلقائي';$('toolbarScrollBtn').classList.toggle('primary',state.autoScroll)}
  $('accessTheme').value=state.theme;$('accessFont').value=state.readFont;
  $('accessLine').value=state.lineHeight;$('accessLineValue').textContent=state.lineHeight.toFixed(1).replace('.', '٫');
  $('accessWords').value=state.wordSpacing;$('accessWordsValue').textContent=ar(state.wordSpacing);
@@ -360,7 +723,7 @@ function syncReadingTools(){
  $('scrollSpeed').value=state.scrollSpeed;$('scrollSpeedValue').textContent=ar(state.scrollSpeed);
  $('accessSize').min=state.layout==='qiyam'?12:25;$('accessSize').max=state.layout==='qiyam'?40:62;
  $('accessSize').value=state.layout==='qiyam'?state.qiyamFont:state.font;$('accessSizeValue').textContent=ar($('accessSize').value);
- $('accessWordTap').checked=state.wordTap;
+ $('accessWordTap').checked=state.wordTap;$('continuousToggle').checked=state.continuous;
  $('autoScrollBtn').textContent=state.autoScroll?'Ⅱ إيقاف التمرير':'▶ بدء التمرير التلقائي';
  $('floatScroll').textContent=state.autoScroll?'Ⅱ إيقاف':'▶ تمرير';
  $('quickScrollBtn').textContent=state.autoScroll?'Ⅱ إيقاف التمرير':'▶ بدء التمرير';
@@ -372,12 +735,48 @@ function syncReadingTools(){
 function toggleWordTap(enabled){state.wordTap=!!enabled;savePrefs();applyPrefs();syncReadingTools();if(!state.wordTap&&state.panelType==='word')closePanel();toast(state.wordTap?'يمكنك الضغط على الكلمات لعرض مواضعها':'تم تعطيل لمس الكلمات؛ التمرير عادي')}
 function openReadingTools(){$('readingOverlay').hidden=false;syncReadingTools()}
 function updateSize(n){const size=Number(n);if(state.layout==='qiyam')state.qiyamFont=size;else state.font=size;document.documentElement.style.setProperty('--qsize',size+'px');$('fontSize').value=size;$('fontNumber').textContent=ar(size);$('accessSizeValue').textContent=ar(size);savePrefs()}
-function pauseScroll(){if(state.autoFrame!==null)cancelAnimationFrame(state.autoFrame);state.autoFrame=null;state.autoScroll=false;state.lastFrame=0;syncReadingTools()}
-function tickScroll(ts){if(!state.autoScroll)return;if(state.lastFrame){const dt=Math.min((ts-state.lastFrame)/1000,.1);const max=document.documentElement.scrollHeight-window.innerHeight;const next=Math.min(max,window.scrollY+dt*state.scrollSpeed);window.scrollTo({top:next,behavior:'instant'});if(max-next<2){pauseScroll();toast('وصلت إلى نهاية الصفحة؛ اضغط «التالي» للانتقال');return}}state.lastFrame=ts;state.autoFrame=requestAnimationFrame(tickScroll)}
-function toggleAutoScroll(){if(state.autoScroll){pauseScroll();return}if(!$('readingOverlay').hidden)$('readingOverlay').hidden=true;state.autoScroll=true;state.lastFrame=0;syncReadingTools();state.autoFrame=requestAnimationFrame(tickScroll)}
-function toggleFocus(){state.focus=!state.focus;document.body.classList.toggle('focus-reading',state.focus);$('readingOverlay').hidden=true;syncReadingTools();if(state.focus)window.scrollTo({top:0,behavior:'smooth'})}
+// Keep a fractional scroll target: some browsers round each scrollTo() to whole pixels.
+// Reading window.scrollY afresh every frame loses movements smaller than one pixel,
+// making slow auto-scroll appear frozen until the user moves the page manually.
+function pauseScroll(){
+ if(state.autoFrame!==null)cancelAnimationFrame(state.autoFrame);
+ state.autoFrame=null;state.autoScroll=false;state.lastFrame=0;
+ state.autoTargetY=window.scrollY;state.autoObservedY=window.scrollY;
+ syncReadingTools();
+}
+function tickScroll(ts){
+ if(!state.autoScroll)return;
+ if(state.continuous)flowEnsureContent();
+ const y=window.scrollY;
+ // Sync with an actual manual scroll (mouse wheel, touch, page jump).
+ if(Math.abs(y-state.autoObservedY)>3)state.autoTargetY=y;
+ const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+ if(state.lastFrame){
+  const dt=Math.max(0,Math.min((ts-state.lastFrame)/1000,.1));
+  state.autoTargetY=Math.min(max,Math.max(0,state.autoTargetY+dt*state.scrollSpeed));
+  window.scrollTo({top:state.autoTargetY,behavior:'instant'});
+  state.autoObservedY=window.scrollY;
+  if(state.continuous)flowEnsureContent();
+  if(max-state.autoTargetY<1&&(!state.continuous||state.flowEnd>=state.verses.length)){
+   pauseScroll();
+   toast(state.continuous?(state.complete?'وصلت إلى نهاية المصحف':'وصلت إلى نهاية النص المحمّل؛ اتصل بالإنترنت لتحميل القرآن كاملًا'):'وصلت إلى نهاية الصفحة');
+   return;
+  }
+ }else{state.autoTargetY=y;state.autoObservedY=y;}
+ state.lastFrame=ts;
+ state.autoFrame=requestAnimationFrame(tickScroll);
+}
+function toggleAutoScroll(){
+ if(state.autoScroll){pauseScroll();return}
+ if(!$('readingOverlay').hidden)$('readingOverlay').hidden=true;
+ if(!state.continuous)setContinuous(true);
+ state.autoScroll=true;state.lastFrame=0;
+ state.autoTargetY=window.scrollY;state.autoObservedY=window.scrollY;
+ syncReadingTools();state.autoFrame=requestAnimationFrame(tickScroll);
+}
+function toggleFocus(){state.focus=!state.focus;document.body.classList.toggle('focus-reading',state.focus);document.body.classList.toggle('flow-reading',state.continuous);document.body.classList.toggle('spread-two',state.spread);$('readingOverlay').hidden=true;syncReadingTools();}
 function bindReadingTools(){
- $('readToolsBtn').onclick=openReadingTools;$('floatTools').onclick=openReadingTools;$('closeReading').onclick=()=>{$('readingOverlay').hidden=true};
+ $('readToolsBtn').onclick=openReadingTools;$('continuousToggle').onchange=e=>setContinuous(e.target.checked);$('floatTools').onclick=openReadingTools;$('closeReading').onclick=()=>{$('readingOverlay').hidden=true};
  $('readingOverlay').addEventListener('click',e=>{if(e.target===$('readingOverlay'))$('readingOverlay').hidden=true});
  $('wordTapToggle').onchange=e=>toggleWordTap(e.target.checked);$('accessWordTap').onchange=e=>toggleWordTap(e.target.checked);
  $('accessTheme').onchange=e=>{state.theme=e.target.value;state.night=state.theme==='dark';savePrefs();applyPrefs()};
@@ -391,14 +790,599 @@ function bindReadingTools(){
  $('quickScrollSpeed').oninput=e=>{state.scrollSpeed=Number(e.target.value);$('scrollSpeed').value=state.scrollSpeed;$('scrollSpeedValue').textContent=ar(state.scrollSpeed);$('quickScrollSpeedValue').textContent=ar(state.scrollSpeed)+' بكسل/ث';savePrefs()};
  $('focusBtn').onclick=toggleFocus;$('exitFocus').onclick=toggleFocus;
  $('readingWake').onclick=()=>keepAwake();$('readingFull').onclick=()=>fullScreen();syncReadingTools();
- document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.autoScroll)pauseScroll()});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.autoScroll)pauseScroll()});window.addEventListener('scroll',onFlowWindowScroll,{passive:true});
 }
 
-function bind(){document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>changeMode(b.dataset.mode));document.querySelectorAll('[data-layout]').forEach(b=>b.onclick=()=>changeLayout(b.dataset.layout));$('fontSize').oninput=e=>updateSize(e.target.value);$('themeBtn').onclick=()=>{state.theme=state.theme==='dark'?'light':'dark';state.night=state.theme==='dark';savePrefs();applyPrefs();syncReadingTools()};for(const id of ['prevBtn','mobilePrev','underPrev'])$(id).onclick=()=>nav(-1);for(const id of ['nextBtn','mobileNext','underNext'])$(id).onclick=()=>nav(1);$('pageNum').onchange=navInput;$('surahSelect').onchange=e=>setSurah(e.target.value);$('surahSettings').onchange=()=>{};$('gotoGhafir').onclick=()=>setSurah(40);$('jumpGhafir').onclick=()=>setSurah(40);$('jumpSurah').onclick=()=>setSurah($('surahSettings').value);$('reloadData').onclick=()=>{if(state.complete){toast('القرآن محمّل بالكامل بالفعل');return} $('status').textContent='جارِ إعادة محاولة التحميل…';downloadQuran()};$('closePanel').onclick=()=>closePanel();$('searchBtn').onclick=openSearch;$('closeSearch').onclick=()=>{$('searchOverlay').hidden=true};$('searchForm').onsubmit=e=>{e.preventDefault();searchNow()};$('settingsBtn').onclick=()=>{$('settingsOverlay').hidden=false};$('closeSettings').onclick=()=>{$('settingsOverlay').hidden=true};$('bookmarkBtn').onclick=addBookmark;$('bookmarksBtn').onclick=showBookmarks;$('closeBookmarks').onclick=()=>{$('bookmarksOverlay').hidden=true};$('fullBtn').onclick=fullScreen;$('wakeBtn').onclick=keepAwake;$('hideToggle').onclick=()=>{state.hidden=!state.hidden;state.revealed.clear();savePrefs();render()};$('showAllBtn').onclick=()=>{state.hidden=false;state.revealed.clear();savePrefs();render()};for(const o of ['searchOverlay','settingsOverlay','bookmarksOverlay'])$(o).addEventListener('click',e=>{if(e.target===$(o))$(o).hidden=true});document.addEventListener('keydown',e=>{if(e.key==='Escape'){for(const o of ['searchOverlay','settingsOverlay','bookmarksOverlay','readingOverlay'])$(o).hidden=true;closePanel();if(state.focus)toggleFocus();if(state.autoScroll)pauseScroll()}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)||!$('searchOverlay').hidden)return;if(e.key==='ArrowLeft')nav(1);if(e.key==='ArrowRight')nav(-1)});let startX=null;document.querySelector('.mushaf').addEventListener('touchstart',e=>{if(e.touches.length===1)startX=e.touches[0].clientX},{passive:true});document.querySelector('.mushaf').addEventListener('touchend',e=>{if(startX===null)return;const d=e.changedTouches[0].clientX-startX;if(Math.abs(d)>95)nav(d>0?1:-1);startX=null},{passive:true});bindReadingTools();}
-function injectPayload(data){if(!data||!Array.isArray(data.surahs))throw Error('payload: missing surahs');const arr=[];const surahs=[];for(const s of data.surahs){surahs.push({n:s.n,name:s.name,count:s.count||s.ayahs?.length||null,rev:s.rev||null});for(const x of s.ayahs)arr.push({s:s.n,a:x.a,t:x.t,p:x.p,j:x.j})}if(arr.length!==6236||surahs.length!==114)throw Error('expected 6236 verses and 114 surahs, got '+arr.length+'/'+surahs.length);if(Math.max(...arr.map(x=>x.p))!==604)throw Error('page metadata incomplete');state.verses=arr;state.surahs=surahs;state.complete=true;indexQuran();populateSurahs();let pos=state.savedPosition;if(pos){const arr=state.bySurah.get(pos.s)||[];const found=arr.find(i=>state.verses[i].a===pos.a);if(found!==undefined){state.verseIndex=found;state.page=state.verses[found].p}}else{const gh=state.bySurah.get(40);if(gh?.length){state.verseIndex=gh[0];state.page=state.verses[gh[0]].p}}state.segment=state.segByIndex[state.verseIndex]||0;$('status').textContent='✓ القرآن كاملًا · ٦٠٤ صفحات مدينة · ١٢٠ صفحة قيام';$('status').classList.add('good');$('dataInfo').textContent='تم تحميل كامل نص القرآن في هذا الجهاز. يحاول التطبيق الاحتفاظ بنسخة محلية بعد أول اتصال؛ الاحتفاظ يعتمد على سياسة تخزين المتصفح. الملاحظات وعلامات الحفظ تُخزّن محليًا.';savePosition();render()}
-async function downloadQuran(){let lastError;for(const url of ['https://api.alquran.cloud/v1/quran/quran-uthmani','https://alquran.api.islamic.network/v1/quran/quran-uthmani']){try{const response=await fetch(url,{cache:'force-cache'});if(!response.ok)throw Error('HTTP '+response.status);const payload=await response.json();if(payload.code!==200||!Array.isArray(payload.data?.surahs))throw Error('unrecognized Quran API response');const reduced={surahs:payload.data.surahs.map(s=>({n:s.number,name:s.name.replace(/^سُورَةُ\s*/,''),count:s.numberOfAyahs,rev:s.revelationType,ayahs:s.ayahs.map(x=>({a:x.numberInSurah,t:x.text,p:x.page,j:x.juz}))}))};injectPayload(reduced);if(saveLocal('full_quran_v1',reduced)){$('status').title='تم تخزين القرآن في ذاكرة المتصفح محليًا';}else{$('status').title='لم تسمح الذاكرة بحفظ نسخة؛ ستحتاج الإنترنت عند الفتح التالي'}return true}catch(e){lastError=e;console.warn('Quran source failed:',url,e)}}$('status').textContent='معاينة دون إنترنت — الفاتحة فقط؛ افتح الملف متصلًا لتحميل القرآن';$('status').title=String(lastError||'');toast('تعذر تحميل القرآن كاملًا. الفاتحة متاحة للتجربة، ويمكنك إعادة محاولة التحميل من الإعدادات.');return false}
+function bind(){document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>changeMode(b.dataset.mode));document.querySelectorAll('[data-layout]').forEach(b=>b.onclick=()=>changeLayout(b.dataset.layout));$('fontSize').oninput=e=>updateSize(e.target.value);$('flowToggle').onclick=()=>setContinuous(!state.continuous);$('themeBtn').onclick=()=>{state.theme=state.theme==='dark'?'light':'dark';state.night=state.theme==='dark';savePrefs();applyPrefs();syncReadingTools()};for(const id of ['prevBtn','mobilePrev','underPrev'])$(id).onclick=()=>nav(-1);for(const id of ['nextBtn','mobileNext','underNext'])$(id).onclick=()=>nav(1);$('pageNum').onchange=navInput;$('surahSelect').onchange=e=>setSurah(e.target.value);$('surahSettings').onchange=()=>{};$('gotoGhafir').onclick=()=>setSurah(40);$('jumpGhafir').onclick=()=>setSurah(40);$('jumpSurah').onclick=()=>setSurah($('surahSettings').value);$('reloadData').onclick=()=>{if(state.complete){toast('القرآن محمّل بالكامل بالفعل');return} $('status').textContent='جارِ إعادة محاولة التحميل…';downloadQuran()};$('closePanel').onclick=()=>closePanel();$('searchBtn').onclick=openSearch;$('closeSearch').onclick=()=>{$('searchOverlay').hidden=true};$('searchForm').onsubmit=e=>{e.preventDefault();searchNow()};$('settingsBtn').onclick=()=>{$('settingsOverlay').hidden=false};$('closeSettings').onclick=()=>{$('settingsOverlay').hidden=true};$('bookmarkBtn').onclick=addBookmark;$('bookmarksBtn').onclick=showBookmarks;$('closeBookmarks').onclick=()=>{$('bookmarksOverlay').hidden=true};$('fullBtn').onclick=fullScreen;$('wakeBtn').onclick=keepAwake;$('hideToggle').onclick=()=>{state.hidden=!state.hidden;state.revealed.clear();savePrefs();render()};$('showAllBtn').onclick=()=>{state.hidden=false;state.revealed.clear();savePrefs();render()};for(const o of ['searchOverlay','settingsOverlay','bookmarksOverlay'])$(o).addEventListener('click',e=>{if(e.target===$(o))$(o).hidden=true});document.addEventListener('keydown',e=>{if(e.key==='Escape'){for(const o of ['searchOverlay','settingsOverlay','bookmarksOverlay','readingOverlay'])$(o).hidden=true;closePanel();if(state.focus)toggleFocus();if(state.autoScroll)pauseScroll()}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)||!$('searchOverlay').hidden)return;if(e.key==='ArrowLeft')nav(1);if(e.key==='ArrowRight')nav(-1)});let startX=null;document.querySelector('.mushaf').addEventListener('touchstart',e=>{if(e.touches.length===1)startX=e.touches[0].clientX},{passive:true});document.querySelector('.mushaf').addEventListener('touchend',e=>{if(startX===null)return;const d=e.changedTouches[0].clientX-startX;if(!state.continuous&&Math.abs(d)>95)nav(d>0?1:-1);startX=null},{passive:true});bindReadingTools();}
+function injectPayload(data){if(!data||!Array.isArray(data.surahs))throw Error('payload: missing surahs');const arr=[];const surahs=[];for(const s of data.surahs){surahs.push({n:s.n,name:s.name,count:s.count||s.ayahs?.length||null,rev:s.rev||null});for(const x of s.ayahs)arr.push({s:s.n,a:x.a,t:x.t,p:x.p,j:x.j})}if(arr.length!==6236||surahs.length!==114)throw Error('expected 6236 verses and 114 surahs, got '+arr.length+'/'+surahs.length);if(Math.max(...arr.map(x=>x.p))!==604)throw Error('page metadata incomplete');state.verses=arr;state.surahs=surahs;state.complete=true;indexQuran();populateSurahs();let pos=state.savedPosition;if(pos){const arr=state.bySurah.get(pos.s)||[];const found=arr.find(i=>state.verses[i].a===pos.a);if(found!==undefined){state.verseIndex=found;state.page=state.verses[found].p}}state.segment=state.segByIndex[state.verseIndex]||0;$('status').textContent='✓ القرآن كاملًا · ٦٠٤ صفحات مدينة · ١٢٠ صفحة قيام';$('status').classList.add('good');$('dataInfo').textContent='تم تحميل كامل نص القرآن في هذا الجهاز. يحاول التطبيق الاحتفاظ بنسخة محلية بعد أول اتصال؛ الاحتفاظ يعتمد على سياسة تخزين المتصفح. الملاحظات وعلامات الحفظ تُخزّن محليًا.';savePosition();render()}
+async function downloadQuran(){let lastError;for(const url of ['https://api.alquran.cloud/v1/quran/quran-uthmani','https://alquran.api.islamic.network/v1/quran/quran-uthmani']){try{const response=await fetch(url,{cache:'force-cache'});if(!response.ok)throw Error('HTTP '+response.status);const payload=await response.json();if(payload.code!==200||!Array.isArray(payload.data?.surahs))throw Error('unrecognized Quran API response');const reduced={surahs:payload.data.surahs.map(s=>({n:s.number,name:s.name.replace(/^سُورَةُ\s*/,''),count:s.numberOfAyahs,rev:s.revelationType,ayahs:s.ayahs.map(x=>({a:x.numberInSurah,t:x.text,p:x.page,j:x.juz}))}))};injectPayload(reduced);if(saveLocal('full_quran_v1',reduced)){$('status').title='تم تخزين القرآن في ذاكرة المتصفح محليًا';}else{$('status').title='لم تسمح الذاكرة بحفظ نسخة؛ ستحتاج الإنترنت عند الفتح التالي'}return true}catch(e){lastError=e;console.warn('Quran source failed:',url,e)}}$('status').textContent='تعذر تحميل فهرس القرآن الكامل؛ صفحات المدينة تستمر من مصدر التخطيط المستقل';$('status').title=String(lastError||'');toast('تعذر تحميل القرآن كاملًا. الفاتحة متاحة للتجربة، ويمكنك إعادة محاولة التحميل من الإعدادات.');return false}
 function bootstrap(){initPrefs();indexQuran();populateSurahs();bind();render();const cached=readLocal('full_quran_v1',null);if(cached){try{injectPayload(cached);$('status').textContent='✓ القرآن كاملًا · نسخة محفوظة على هذا الجهاز';return}catch(e){console.warn('Cached Quran invalid:',e)}}downloadQuran()}
-bootstrap();
+
+// v5: Madinah 604-page 15-line layout — Unicode display, line boundaries from CC BY-SA source.
+const EXACT_BASE='https://raw.githubusercontent.com/ouryhamdalaye/madinah-mushaf-json/main/pages/';
+const exact={cache:new Map(),pending:new Map(),meta:[],pageHeads:[],flowFirst:1,flowLast:1,flowLoading:false,renderStamp:0,dbPromise:null,metaPending:null};
+const p3=n=>String(n).padStart(3,'0');
+const wordKey=(s,a)=>s+':'+a;
+function exactDB(){
+ if(exact.dbPromise)return exact.dbPromise;
+ exact.dbPromise=new Promise(resolve=>{
+  try{
+   if(!('indexedDB' in window)){resolve(null);return}
+   const request=indexedDB.open('basaer-line-pages-1',1);
+   request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('pages'))request.result.createObjectStore('pages',{keyPath:'page'})};
+   request.onsuccess=()=>resolve(request.result);request.onerror=()=>resolve(null);request.onblocked=()=>resolve(null);
+  }catch(e){resolve(null)}
+ });
+ return exact.dbPromise;
+}
+async function readExactCache(n){
+ const db=await exactDB();if(!db)return null;
+ return new Promise(resolve=>{try{const tx=db.transaction('pages','readonly');const r=tx.objectStore('pages').get(n);r.onsuccess=()=>resolve(r.result?.data||null);r.onerror=()=>resolve(null)}catch{resolve(null)}});
+}
+async function saveExactCache(n,data){
+ const db=await exactDB();if(!db)return;
+ try{const tx=db.transaction('pages','readwrite');tx.objectStore('pages').put({page:n,data});}catch{}
+}
+async function getExactPage(number){
+ const n=Number(number);if(!Number.isInteger(n)||n<1||n>604)throw Error('رقم الصفحة خارج النطاق');
+ if(exact.cache.has(n))return exact.cache.get(n);
+ if(exact.pending.has(n))return exact.pending.get(n);
+ const promise=(async()=>{
+  const fromCache=await readExactCache(n);
+  if(fromCache?.page===n&&Array.isArray(fromCache.lines)&&Array.isArray(fromCache.verses)){exact.cache.set(n,fromCache);return fromCache}
+  let data,layoutError;
+  for(const endpoint of [EXACT_BASE,'https://cdn.jsdelivr.net/gh/ouryhamdalaye/madinah-mushaf-json@main/pages/']){
+   try{const r=await fetch(endpoint+'page-'+p3(n)+'.json',{cache:'force-cache'});if(!r.ok)throw Error('HTTP '+r.status);data=await r.json();break}catch(e){layoutError=e}
+  }
+  if(!data)throw Error('تعذر تحميل ترتيب الصفحة: '+String(layoutError||'تحقق من الاتصال'));
+  if(data.page!==n||!Array.isArray(data.lines)||!Array.isArray(data.verses)||!data.lines.some(l=>l.type==='ayah-line'))throw Error('بيانات تخطيط الصفحة غير صحيحة');
+  for(const line of data.lines)if(line.type==='ayah-line'&&!Array.isArray(line.tokens))throw Error('بيانات السطر ناقصة');
+  exact.cache.set(n,data);saveExactCache(n,data);
+  if(exact.cache.size>30){const first=exact.cache.keys().next().value;exact.cache.delete(first)}
+  return data;
+ })();exact.pending.set(n,promise);
+ try{return await promise}finally{exact.pending.delete(n)}
+}
+async function ensureExactMeta(){
+ if(exact.metaPending)return exact.metaPending;
+ exact.metaPending=(async()=>{
+  const oldM=readLocal('exact_meta_v1',null),oldP=readLocal('exact_heads_v1',null);
+  if(Array.isArray(oldM)&&oldM.length===114)exact.meta=oldM;
+  if(Array.isArray(oldP)&&oldP.length===604)exact.pageHeads=oldP;
+  if(!exact.meta.length||!exact.pageHeads.length){
+   try{
+    const [m,p]=await Promise.all(['meta.json','verse-to-page.json'].map(async name=>{
+      const r=await fetch(EXACT_BASE+name,{cache:'force-cache'});if(!r.ok)throw Error(name);return r.json()
+    }));
+    if(m.length!==114||p.length!==604)throw Error('خطأ في عدد السور أو الصفحات');
+    exact.meta=m;exact.pageHeads=p;saveLocal('exact_meta_v1',m);saveLocal('exact_heads_v1',p)
+   }catch(e){console.warn('Madinah metadata not loaded',e)}
+  }
+  if(exact.meta.length===114){
+   if(!state.complete){state.surahs=exact.meta.map(x=>({n:x.id,name:x.name,count:x.total_verses,rev:x.type==='medinan'?'Medinan':'Meccan'}));populateSurahs()}
+   populateExactJump();
+  }
+  return exact.meta.length===114
+ })();return exact.metaPending;
+}
+function populateExactJump(){
+ const opts=(exact.meta.length?exact.meta:state.surahs.map(s=>({id:s.n,name:s.name,total_verses:s.count}))).map(s=>`<option value="${s.id}">${ar(s.id)} · ${esc(s.name)}</option>`).join('');
+ $('jumpSura').innerHTML=opts;$('jumpSura').value=state.verses[state.verseIndex]?.s||1;
+}
+function firstPageToken(page){for(const line of page?.lines||[])if(line.type==='ayah-line'&&line.tokens?.length)return line.tokens[0];return null}
+function pageWords(page){return (page?.lines||[]).filter(l=>l.type==='ayah-line').flatMap(l=>l.tokens||[])}
+function verseIndexFor(s,a){const ids=state.bySurah.get(Number(s));if(ids){const found=ids.find(i=>state.verses[i].a===Number(a));return found===undefined?-1:found}return -1}
+function getPageForVerse(s,a){
+ s=Number(s);a=Number(a);
+ if(exact.pageHeads.length===604){let answer=1;for(let p=0;p<604;p++){const h=exact.pageHeads[p];if(!h||h.surah>s||h.surah===s&&h.ayah>a)break;answer=p+1}return answer}
+ const i=verseIndexFor(s,a);return i>=0?state.verses[i].p:1;
+}
+function suraMetaQuick(n){return exact.meta.find(x=>x.id===n)||null}
+function exactVerseMarker(s,a){const b=document.createElement('button');b.className='exact-marker';b.type='button';b.textContent=ar(a);b.title='تفسير وأسباب نزول الآية '+s+':'+a;b.setAttribute('aria-label',b.title);b.onclick=e=>{e.stopPropagation();const idx=verseIndexFor(s,a);if(idx>=0){state.verseIndex=idx;state.focusedIndex=idx;savePosition();openVersePanel(idx)}else toast('جار تحميل النص الكامل لفتح تفاصيل الآية؛ تخطيط السطر متاح بالفعل')};return b}
+function revealVerseByKey(s,a){const idx=verseIndexFor(s,a);if(idx>=0)state.revealed.add(idx);document.querySelectorAll(`.exact-word[data-vkey="${s}:${a}"]`).forEach(el=>el.classList.remove('hideword'))}
+function buildExactPage(data,nextData){
+ const n=data.page;const card=document.createElement('section');card.className='madina-page tone-'+((n-1)%6);card.dataset.page=n;card.id='madina-page-'+n;card.setAttribute('aria-label','صفحة المدينة '+n);
+ const heading=document.createElement('div');heading.className='madina-page-head';const left=document.createElement('span');left.textContent='مصحف المدينة · '+ar(n)+' / ٦٠٤';const main=document.createElement('strong');main.textContent='الصفحة '+ar(n);heading.append(main,left);card.append(heading);
+ const printNote=document.createElement('div');printNote.className='print-status';printNote.textContent='جارِ تحميل الخط الطباعي الخاص بهذه الصفحة…';printNote.setAttribute('aria-live','polite');card.append(printNote);
+ const frame=document.createElement('div');frame.className='madina-lines';const wordMap=new Map();for(const verse of data.verses){const k=wordKey(verse.surah_number,verse.ayah_number);wordMap.set(k,new Map(verse.words.map(w=>[w.word_index,w.text])))}
+ const tokens=pageWords(data);const nextFirst=firstPageToken(nextData);let global=0;let glyphCount=0;
+ for(const line of data.lines){
+  if(line.type==='surah-header'){
+   const title=document.createElement('div');title.className='madina-surah-title';title.textContent=line.text||'اسم السورة';frame.append(title);
+   const following=data.lines.slice(data.lines.indexOf(line)+1).find(l=>l.type==='ayah-line');const nextS=following?.tokens?.[0]?.s;
+   if(nextS&&nextS!==1&&nextS!==9){const b=document.createElement('div');b.className='madina-bismillah';b.textContent=BASMALA;frame.append(b)}
+   continue;
+  }
+  if(line.type!=='ayah-line')continue;
+  const row=document.createElement('div');row.className='madina-line';row.dataset.line=(line.line||'');if(line.tokens.length<7)row.classList.add('short');
+  for(const t of line.tokens){
+   const word=wordMap.get(wordKey(t.s,t.a))?.get(t.w);
+   if(typeof word!=='string')throw Error('نص كلمة غير موجود: '+t.s+':'+t.a+':'+t.w);
+   const el=document.createElement('span');el.className='exact-word word';el.textContent=word;el.dataset.word=norm(word);el.dataset.vkey=wordKey(t.s,t.a);el.dataset.s=t.s;el.dataset.a=t.a;
+   if(state.selectedWord&&el.dataset.word===state.selectedWord)el.classList.add('hit');
+   const ix=verseIndexFor(t.s,t.a);if(state.mode==='hifz'&&state.hidden&&ix>=0&&!state.revealed.has(ix))el.classList.add('hideword');
+   el.onclick=(e)=>{e.stopPropagation();if(state.mode==='hifz'&&state.hidden&&el.classList.contains('hideword')){revealVerseByKey(t.s,t.a);return}if(state.wordTap)openWord(word)};
+   row.append(el);glyphCount++;
+   const following=(global<tokens.length-1)?tokens[global+1]:nextFirst;
+   if((following&&(following.s!==t.s||following.a!==t.a))||(n===604&&!following))row.append(exactVerseMarker(t.s,t.a));
+   global++;
+  }
+  frame.append(row)
+ }
+ if(global!==tokens.length||glyphCount===0)throw Error('عدد الكلمات بالسطر لا يطابق بيانات الصفحة');
+ card.dataset.lineCount=String(data.lines.length);card.dataset.wordCount=String(glyphCount);
+ card.append(frame);
+ const foot=document.createElement('div');foot.className='madina-page-foot';const first=firstPageToken(data);foot.textContent=(first?'سورة '+surahName(first.s)+' · آية '+ar(first.a):'')+'                                     '+'﴿ '+ar(n)+' ﴾';card.append(foot);
+ // Upgrade to page-specific calligraphic font when available; keep Unicode fallback otherwise.
+ void upgradePrintedCard(card,data).catch(e=>console.warn('printed page fallback',n,e));
+ return card
+}
+function fitExactCard(card){
+ const box=card.querySelector('.madina-lines');if(!box)return;
+ const rows=[...box.querySelectorAll('.madina-line')];
+ if(!rows.length)return;
+ const font=Number(state.font)||34;box.style.fontSize=font+'px';
+ const w=box.clientWidth||300;let max=0;
+ for(const row of rows){
+   row.style.width='100%';row.style.fontSize='inherit';
+   const contents=[...row.children];let measured=contents.reduce((sum,child)=>sum+child.getBoundingClientRect().width,0);
+   measured+=Math.max(0,contents.length-1)*(parseFloat(getComputedStyle(row).columnGap)||0);
+   max=Math.max(max,row.scrollWidth,measured)
+  }
+ if(max>w){const ratio=(w-2)/max;box.style.fontSize=Math.max(11,font*ratio).toFixed(2)+'px';}
+ // Never reflow a line to preserve printed word boundaries, even if user changes device width.
+}
+function fitAllExact(){document.querySelectorAll('.madina-page').forEach(fitExactCard)}
+function showExactNav(n,continuous){
+ const cachedCard=document.getElementById('madina-page-'+n);updatePrintedBadge(n,cachedCard?.dataset.fontStatus==='qcf-v2'?'ok':cachedCard?.dataset.fontStatus==='unicode-fallback'?'error':'loading');
+ $('pageNum').disabled=false;$('pageNum').min=1;$('pageNum').max=604;$('pageNum').value=n;
+ $('navCount').textContent='صفحة مدينة';$('chapterLabel').textContent='صفحة '+ar(n);$('pageLabel').textContent='ص '+ar(n);
+ $('flowLabel').textContent=continuous?'أسطر المدينة متصلة':'صفحات المدينة';
+ $('underPage').textContent='صفحة '+ar(n)+' / ٦٠٤';$('bottomPage').textContent=ar(n)+' / ٦٠٤';
+ for(const id of ['prevBtn','mobilePrev','underPrev'])$(id).disabled=n<=1;
+ for(const id of ['nextBtn','mobileNext','underNext'])$(id).disabled=state.spread?spreadStart(n)+1>=604:n>=604;
+ const current=state.verses[state.verseIndex];if(current&&state.complete)$('surahSelect').value=current.s;
+ $('readerTip').textContent='الخط الأصلي QCF V2 لكل صفحة عند توفر الإنترنت؛ تظل حدود الأسطر والصفحات ثابتة عند التمرير، مع ألوان متناوبة.';
+}
+function exactPageError(err){const msg=document.createElement('div');msg.className='warning';msg.textContent='تعذر تحميل ترتيب أسطر مصحف المدينة من المصدر حاليًا. يتطلب العرض المطابق أول اتصال بالإنترنت، ثم تُحفظ الصفحات التي فتحتها على الجهاز. '+String(err?.message||'');return msg}
+async function renderExactSingle(){
+ const stamp=++exact.renderStamp,n=state.page;
+ $('verses').classList.add('madina-reader');$('verses').replaceChildren();$('pageSurahBanner').replaceChildren();$('pageFoot').textContent='';showExactNav(n,false);
+ $('verses').textContent='جارِ تحميل توزيع أسطر الصفحة '+ar(n)+'…';
+ try{
+  if(state.spread){
+   const first=spreadStart(n),last=Math.min(604,first+1);
+   const data=await Promise.all(Array.from({length:last-first+1},(_,i)=>getExactPage(first+i)));
+   const next=last<604?await getExactPage(last+1).catch(()=>null):null;
+   if(stamp!==exact.renderStamp||state.layout!=='madina'||state.continuous)return;
+   const wrap=document.createElement('div');wrap.className='page-spread madina-spread';
+   for(let i=0;i<data.length;i++)wrap.append(buildExactPage(data[i],data[i+1]||next));
+   $('verses').replaceChildren(wrap);requestAnimationFrame(fitAllExact);
+  } else {
+   const [data,next]=await Promise.all([getExactPage(n),n<604?getExactPage(n+1).catch(()=>null):Promise.resolve(null)]);
+   if(stamp!==exact.renderStamp||state.layout!=='madina'||state.continuous)return;
+   const card=buildExactPage(data,next);$('verses').replaceChildren(card);requestAnimationFrame(()=>fitExactCard(card));
+  }
+ }catch(err){if(stamp!==exact.renderStamp)return;console.warn(err);$('verses').replaceChildren(exactPageError(err))}
+}
+async function renderExactFlow(){
+ const stamp=++exact.renderStamp;const p=state.page;
+ $('verses').classList.add('madina-reader');$('verses').replaceChildren();$('pageSurahBanner').replaceChildren();$('pageFoot').textContent='';showExactNav(p,true);
+ $('verses').textContent='جارِ تحميل الصفحات المتصلة…';
+ const a=state.spread?Math.max(1,spreadStart(p)-2):Math.max(1,p-1),b=state.spread?Math.min(604,spreadStart(p)+3):Math.min(604,p+2);
+ try{
+  const all=await Promise.all(Array.from({length:b-a+1},(_,i)=>getExactPage(a+i)));
+  const lastNext=b<604?await getExactPage(b+1).catch(()=>null):null;
+  if(stamp!==exact.renderStamp||!state.continuous||state.layout!=='madina')return;
+  const fragment=document.createDocumentFragment();for(let i=0;i<all.length;i++)fragment.append(buildExactPage(all[i],all[i+1]||lastNext));
+  $('verses').replaceChildren(fragment);exact.flowFirst=a;exact.flowLast=b;state.flowStart=0;state.flowEnd=b===604?state.verses.length:0;
+  requestAnimationFrame(()=>{fitAllExact();const el=document.getElementById('madina-page-'+p);if(el){const rect=el.getBoundingClientRect();window.scrollTo({top:window.scrollY+rect.top-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--basaer-reading-offset'))||92),behavior:'instant'});}state.flowLastY=window.scrollY;flowEnsureContent()});
+ }catch(err){if(stamp!==exact.renderStamp)return;console.warn(err);$('verses').replaceChildren(exactPageError(err))}
+}
+function renderQiyamSpread(){
+ const root=$('verses');const firstFace=Math.floor(state.segment/2)*2;
+ if(!state.segments[firstFace])return;
+ const spread=document.createElement('div');spread.className='page-spread qiyam-spread';
+ for(let n=firstFace;n<Math.min(firstFace+2,state.segments.length);n++){
+  const segment=state.segments[n],face=document.createElement('section');face.className='qiyam-face';
+  const heading=document.createElement('div');heading.className='qiyam-face-header';heading.textContent='الجزء '+ar(segment.juz)+' · الوجه '+ar(segment.face)+' من ٤';face.append(heading);
+  let prevSurah=null;
+  for(let i=segment.start;i<segment.end;i++){
+   const v=state.verses[i];if(prevSurah!==v.s){if(prevSurah!==null)showSurahHead(face,v.s);if(v.a===1&&v.s!==1&&v.s!==9)showBasmala(face);prevSurah=v.s}renderVerse(face,i)
+  }
+  spread.append(face)
+ }
+ root.replaceChildren(spread);$('pageSurahBanner').replaceChildren();
+ $('navCount').textContent='وجهان من القيام';$('pageNum').value=firstFace+1;
+ $('underPage').textContent='وجها القيام '+ar(firstFace+1)+'–'+ar(Math.min(firstFace+2,state.segments.length));
+ $('bottomPage').textContent=$('underPage').textContent;
+ for(const id of ['prevBtn','mobilePrev','underPrev'])$(id).disabled=firstFace===0;
+ for(const id of ['nextBtn','mobileNext','underNext'])$(id).disabled=firstFace+2>=state.segments.length;
+}
+function render(){
+ if(state.layout==='paper'){applyPrefs();return renderPaper()}
+ if(state.layout==='qiyam'){$('verses').classList.remove('madina-reader','paper-reader');legacyRender();if(state.spread&&!state.continuous)renderQiyamSpread();return}
+ applyPrefs();if(state.continuous){renderExactFlow();return}renderExactSingle();
+}
+function renderContinuous(){if(state.layout==='paper')return renderPaper();if(state.layout==='qiyam')return legacyRenderContinuous();return renderExactFlow()}
+async function appendExactPage(n,prepend=false){
+ const stamp=exact.renderStamp;let nums;
+ if(state.spread){const start=spreadStart(n);nums=[start,start+1].filter(x=>x>=1&&x<=604)}
+ else nums=[n];
+ const all=await Promise.all(nums.map(x=>getExactPage(x)));
+ const after=nums.at(-1)<604?await getExactPage(nums.at(-1)+1).catch(()=>null):null;
+ if(stamp!==exact.renderStamp||state.layout!=='madina'||!state.continuous)return;
+ const fragment=document.createDocumentFragment();for(let i=0;i<all.length;i++)fragment.append(buildExactPage(all[i],all[i+1]||after));
+ const root=$('verses'),oldY=window.scrollY,before=document.documentElement.scrollHeight;
+ if(prepend){root.prepend(fragment);exact.flowFirst=nums[0]}
+ else{root.append(fragment);exact.flowLast=nums.at(-1)}
+ fitAllExact();
+ if(prepend){const delta=document.documentElement.scrollHeight-before;window.scrollTo({top:oldY+delta,behavior:'instant'});if(state.autoScroll){state.autoTargetY+=delta;state.autoObservedY+=delta}}
+ state.flowEnd=exact.flowLast>=604?state.verses.length:0;
+}
+function flowEnsureContent(){
+ if(state.layout==='paper')return paperEnsureContent();
+ if(state.layout==='qiyam')return legacyFlowEnsureContent();
+ if(!state.continuous||exact.flowLoading)return;
+ const pages=$('verses').querySelectorAll('.madina-page');if(!pages.length)return;
+ const end=pages[pages.length-1].getBoundingClientRect();const begin=pages[0].getBoundingClientRect();
+ const wantNext=end.bottom-window.innerHeight<1400&&exact.flowLast<604;
+ const wantPrev=begin.top>-850&&exact.flowFirst>1&&window.scrollY<state.flowLastY-1;
+ state.flowLastY=window.scrollY;
+ if(!wantNext&&!wantPrev)return;
+ exact.flowLoading=true;
+ const num=wantNext?exact.flowLast+1:exact.flowFirst-1;
+ appendExactPage(num,!wantNext).catch(e=>console.warn('page preload',num,e)).finally(()=>{exact.flowLoading=false});
+}
+function updateFlowPosition(){
+ if(state.layout==='paper')return paperUpdatePosition();
+ if(state.layout==='qiyam')return legacyUpdateFlowPosition();
+ if(!state.continuous)return;
+ const pages=$('verses').querySelectorAll('.madina-page');let selected=null;
+ for(const el of pages){const r=el.getBoundingClientRect();if(r.bottom>140){selected=el;break}}
+ if(!selected)return;const page=Number(selected.dataset.page);if(page===state.page)return;
+ state.page=page;
+ const all=selected.querySelectorAll('.exact-word');let first=all[0],ey=window.innerHeight*.39;
+ for(const el of all){const r=el.getBoundingClientRect();if(r.bottom>ey){first=el;break}}
+ const s=Number(first?.dataset.s),a=Number(first?.dataset.a),idx=verseIndexFor(s,a);
+ if(idx>=0){state.verseIndex=idx;savePosition()}
+ showExactNav(page,true);
+}
+function nav(delta){
+ if(state.spread&&!state.continuous){
+  if(state.layout==='qiyam'){
+   const first=Math.floor(state.segment/2)*2,other=first+2*delta;
+   if(other>=0&&other<state.segments.length)setVerseIndex(state.segments[other].start,true);
+   return;
+  }
+  return goToPage(spreadStart(state.page)+2*delta);
+ }
+ if(state.layout==='qiyam')return legacyNav(delta);goToPage(state.page+delta);
+}
+function navInput(){if(state.layout==='qiyam')return legacyNavInput();goToPage(Number($('pageNum').value))}
+function goToPage(n){
+ n=Number(n);if(!Number.isInteger(n)||n<1||n>604){toast('رقم الصفحة من ١ إلى ٦٠٤');return}
+ pauseScroll();state.page=n;
+ // Some pages start in the middle of a long ayah; keep the visible page independent from verse starts.
+ let i=state.verses.findIndex(v=>v.p===n);
+ if(i<0){for(let j=state.verses.length-1;j>=0;j--)if(state.verses[j].p<=n){i=j;break}}
+ if(i>=0)state.verseIndex=i;
+ state.focusedIndex=null;state.selectedWord=null;closePanel(false);if(state.complete)savePosition();render();
+ $('jumpOverlay').hidden=true;window.scrollTo({top:0,behavior:'instant'});
+}
+function goToVerse(s,a){
+ s=Number(s);a=Number(a);
+ const meta=exact.meta.find(x=>x.id===s)||state.surahs.find(x=>x.n===s);
+ const count=meta?.total_verses||meta?.count||0;
+ if(!Number.isInteger(s)||s<1||s>114||!Number.isInteger(a)||a<1||(count&&a>count)){toast('تحقق من السورة ورقم الآية');return}
+ const idx=verseIndexFor(s,a);
+ if(idx>=0){setVerseIndex(idx,true);$('jumpOverlay').hidden=true;return}
+ if(exact.pageHeads.length===604){const p=getPageForVerse(s,a);goToPage(p);return}
+ toast('بيانات السورة لم تُحمّل بعد؛ اتصل بالإنترنت')
+}
+function setSurah(n){goToVerse(Number(n),1);$('settingsOverlay').hidden=true}
+const JUZ_FIRST_PAGES=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582];
+function goToJuz(j){
+ j=Number(j);if(!Number.isInteger(j)||j<1||j>30){toast('الجزء من ١ إلى ٣٠');return}
+ if(state.complete){const first=state.verses.find(v=>v.j===j);if(first){goToVerse(first.s,first.a);return}}
+ goToPage(JUZ_FIRST_PAGES[j-1]);toast('انتقلت لصفحة بداية الجزء '+ar(j)+' وفق ترقيم مصحف المدينة');
+}
+function currentMark(){
+ let s=state.verses[state.verseIndex]?.s||1,a=state.verses[state.verseIndex]?.a||1,p=state.page;
+ if(state.layout==='madina'){
+  const cards=[...document.querySelectorAll('.madina-page')];const card=cards.find(el=>el.getBoundingClientRect().bottom>window.innerHeight*.28)||cards[0];
+  if(card){p=Number(card.dataset.page);const w=card.querySelector('.exact-word');if(w){s=Number(w.dataset.s);a=Number(w.dataset.a)}}
+ }
+ return {s,a,p,at:Date.now()};
+}
+function markLabel(type){const mark=readLocal(type==='hifz'?'hifz_mark_v1':'reading_mark_v1',null);return mark?'سورة '+surahName(mark.s)+' · آية '+ar(mark.a)+' · ص '+ar(mark.p):'لم تحدد بعد'}
+function refreshMarks(){$('readMarkLabel').textContent='قراءتي: '+markLabel('read');$('hifzMarkLabel').textContent='حفظي: '+markLabel('hifz')}
+function saveMark(type){const where=currentMark(),k=type==='hifz'?'hifz_mark_v1':'reading_mark_v1';saveLocal(k,where);refreshMarks();toast((type==='hifz'?'تم حفظ موضع الحفظ: ':'تم حفظ موضع القراءة: ')+surahName(where.s)+' · '+ar(where.a)+' (ص '+ar(where.p)+')')}
+function returnMark(type){const mark=readLocal(type==='hifz'?'hifz_mark_v1':'reading_mark_v1',null);if(!mark){toast('لم تحدد هذا الموضع بعد');return}if(state.layout==='madina')goToPage(mark.p);else goToVerse(mark.s,mark.a);$('jumpOverlay').hidden=true}
+async function cacheAllMadinah(){
+ const btn=$('cacheAllPages');if(btn.disabled)return;
+ btn.disabled=true;let good=0,fail=0;
+ const progress=$('cacheProgress');
+ for(let start=1;start<=604;start+=6){
+   const pages=Array.from({length:Math.min(6,605-start)},(_,i)=>start+i);
+   const results=await Promise.allSettled(pages.map(getExactPage));
+   for(const r of results){if(r.status==='fulfilled')good++;else fail++}
+   progress.textContent='حُفظ '+ar(good)+' من ٦٠٤ صفحة'+(fail?' · تعذّر '+ar(fail):'');
+   if(fail>=24&&good===0){progress.textContent='تعذّر الاتصال بمصدر الصفحات؛ تحقّق من الإنترنت وحاول مجددًا.';btn.disabled=false;return}
+ }
+ btn.disabled=false;
+ progress.textContent=good===604?'✓ تم تنزيل بيانات صفحات المدينة الـ٦٠٤؛ قد تحتاج خطوطها المصحفية لاتصال عند العرض':'حُفظ '+ar(good)+' صفحة. الصفحات المتعذرة تحتاج إعادة المحاولة.';
+}
+function v5Init(){
+ $('cacheAllPages').onclick=cacheAllMadinah;
+ $('jumpOpen').onclick=()=>{populateExactJump();$('jumpAya').value=state.verses[state.verseIndex]?.a||1;$('jumpPageNo').value=state.page;refreshMarks();$('jumpOverlay').hidden=false};
+ $('jumpClose').onclick=()=>{$('jumpOverlay').hidden=true};$('jumpOverlay').addEventListener('click',e=>{if(e.target===$('jumpOverlay'))$('jumpOverlay').hidden=true});
+ $('jumpSura').onchange=()=>{$('jumpAya').value=1};
+ $('jumpAyahGo').onclick=()=>goToVerse($('jumpSura').value,$('jumpAya').value);
+ $('jumpPageGo').onclick=()=>goToPage($('jumpPageNo').value);
+ $('jumpJuzGo').onclick=()=>goToJuz($('jumpJuz').value);
+ $('markRead').onclick=()=>saveMark('read');$('markHifz').onclick=()=>saveMark('hifz');
+ $('saveReadHere').onclick=()=>saveMark('read');$('saveHifzHere').onclick=()=>saveMark('hifz');
+ $('returnRead').onclick=()=>returnMark('read');$('returnHifz').onclick=()=>returnMark('hifz');
+ $('returnLast').onclick=()=>{const pos=readLocal('position',null);if(pos)goToVerse(pos.s,pos.a);else toast('لا يوجد موضع قراءة تلقائي محفوظ')};
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')$('jumpOverlay').hidden=true});
+ document.addEventListener('input',e=>{if(['accessSize','fontSize','accessWidth','accessLine','accessWords'].includes(e.target?.id))requestAnimationFrame(fitAllExact)});
+ window.addEventListener('resize',()=>requestAnimationFrame(fitAllExact),{passive:true});
+ populateExactJump();refreshMarks();if(document.fonts?.ready)document.fonts.ready.then(()=>requestAnimationFrame(fitAllExact));ensureExactMeta().then(()=>{if(state.layout==='madina')render()});
+}
+
+
+/* V6: page-specific QCF V2 typography and verified 15-line layout.
+   Sources: King Fahd Glorious Quran Printing Complex/QUL (layout and glyph data),
+   Quran Foundation CDN (per-page font file); Arabic Unicode words remain for search.
+   Fonts are fetched on demand from the official CDN; none are bundled or redistributed. */
+const QCF_V2_PAGES='https://raw.githubusercontent.com/manaf/KFGQPC-Madinah-Mushaf/main/data/pages/';
+const QCF_V2_FONTS='https://verses.quran.foundation/fonts/quran/hafs/v2/woff2/';
+const printed={json:new Map(),jsonPending:new Map(),fonts:new Map(),pendingFonts:new Map()};
+function getPrintedGlyphPage(page){
+ page=Number(page);
+ if(printed.json.has(page))return Promise.resolve(printed.json.get(page));
+ if(printed.jsonPending.has(page))return printed.jsonPending.get(page);
+ const promise=(async()=>{
+  let data,fetchError;
+  for(const endpoint of [QCF_V2_PAGES,'https://cdn.jsdelivr.net/gh/manaf/KFGQPC-Madinah-Mushaf@main/data/pages/']){
+   try{const resp=await fetch(endpoint+'page-'+p3(page)+'.json',{cache:'force-cache'});if(!resp.ok)throw Error('HTTP '+resp.status);data=await resp.json();break}catch(e){fetchError=e}
+  }
+  if(!data)throw new Error('بيانات الخط الطباعي لم تُحمّل: '+String(fetchError||''));
+  if(data.page!==page||!Array.isArray(data.lines)||!data.lines.some(x=>x.type==='text'))throw new Error('بيانات خط الصفحة غير صالحة');
+  if(data.lines.filter(x=>x.type==='text').length>15)throw new Error('عدد سطور غير متوقع');
+  printed.json.set(page,data);
+  if(printed.json.size>40)printed.json.delete(printed.json.keys().next().value);
+  return data;
+ })();printed.jsonPending.set(page,promise);
+ return promise.finally(()=>printed.jsonPending.delete(page));
+}
+function getPrintedPageFont(page){
+ page=Number(page);
+ if(printed.fonts.has(page))return Promise.resolve(printed.fonts.get(page));
+ if(printed.pendingFonts.has(page))return printed.pendingFonts.get(page);
+ const promise=(async()=>{
+  if(!window.FontFace||!document.fonts)throw new Error('هذا المتصفح لا يدعم خطوط المصحف المخصصة');
+  const family='Basaer_QCFV2_'+page;
+  const font=new FontFace(family,'url("'+QCF_V2_FONTS+'p'+page+'.woff2") format("woff2")',{style:'normal',weight:'400',display:'swap'});
+  await font.load();document.fonts.add(font);printed.fonts.set(page,family);return family;
+ })(); printed.pendingFonts.set(page,promise);
+ return promise.finally(()=>printed.pendingFonts.delete(page));
+}
+function updatePrintedBadge(page,status){
+ const el=document.getElementById('printedFontBadge');if(!el||Number(page)!==Number(state.page))return;
+ el.classList.toggle('is-ok',status==='ok');el.classList.toggle('is-error',status==='error');
+ el.textContent=status==='ok'?'✓ خط المصحف الأصلي · ص '+ar(page):status==='error'?'⚠ الخط البديل · ص '+ar(page):'جارِ تحميل خط ص '+ar(page);
+}
+function printedTextMap(data){
+ const map=new Map();
+ for(const v of data.verses||[])for(const w of v.words||[])map.set(v.surah_number+':'+v.ayah_number+':'+(w.word_index+1),w.text);
+ return map;
+}
+async function upgradePrintedCard(card,data){
+ const page=data.page;
+ let glyphs,fontFamily;
+ try{[glyphs,fontFamily]=await Promise.all([getPrintedGlyphPage(page),getPrintedPageFont(page)]);}catch(e){
+  card.dataset.fontStatus='unicode-fallback';
+  const note=card.querySelector('.print-status');if(note){note.classList.add('warning');note.replaceChildren(document.createTextNode('⚠ خط الصفحة المصحفي لم يُحمّل؛ تُعرض نفس الأسطر بخط بديل. '));const retry=document.createElement('button');retry.type='button';retry.textContent='إعادة المحاولة';retry.onclick=()=>{printed.pendingFonts.delete(page);printed.jsonPending.delete(page);note.textContent='جارِ إعادة تحميل الخط…';note.classList.remove('warning');void upgradePrintedCard(card,data)};note.append(retry)}
+  updatePrintedBadge(page,'error');console.warn('QCF V2 fallback page '+page,e);return;
+ }
+ if(card.dataset.page!==String(page)||!card.isConnected)return;
+ const wordMap=printedTextMap(data);const oldFrame=card.querySelector('.madina-lines');if(!oldFrame)return;
+ const frame=document.createElement('div');frame.className='madina-lines';frame.style.fontFamily='"'+fontFamily+'"';
+ let num=0,lineCount=0;
+ for(const line of glyphs.lines){
+  if(line.type==='surah_name'){
+   const el=document.createElement('div');el.className='madina-surah-title';
+   let sn=Number(line.decor?.surah);
+   el.textContent='سُورَةُ '+(sn?surahName(sn):(line.decor?.surah_name_ar||''));
+   frame.append(el);continue;
+  }
+  if(line.type==='basmallah'){
+   const el=document.createElement('div');el.className='madina-bismillah';el.textContent=BASMALA;frame.append(el);continue;
+  }
+  if(line.type!=='text')continue;
+  lineCount++;
+  const row=document.createElement('div');row.className='madina-line';row.dataset.line=line.line;
+  if(line.centered)row.classList.add('centered');
+  if(!Array.isArray(line.words))return;
+  for(const item of line.words){
+   const loc=String(item.location||'').split(':');const [sv,av,wv]=loc.map(Number);
+   if(!sv||!av||!wv||!item.qpcV2)return;
+   const isMarker=item.kind==='marker';
+   const el=document.createElement(isMarker?'button':'span');el.className=isMarker?'exact-marker':'exact-word word';
+   if(isMarker){
+    el.type='button';el.title='تفسير الآية '+sv+':'+av;el.setAttribute('aria-label',el.title);
+    el.onclick=e=>{e.stopPropagation();const ix=verseIndexFor(sv,av);if(ix>=0){state.verseIndex=ix;state.focusedIndex=ix;savePosition();openVersePanel(ix)}else toast('حمّل القرآن كاملًا لفتح تفاصيل الآية')};
+   }else{
+    const arabic=wordMap.get(sv+':'+av+':'+wv);
+    if(typeof arabic!=='string')return; // Never show a mismatched glyph-to-word mapping.
+    el.dataset.word=norm(arabic);el.dataset.vkey=wordKey(sv,av);el.dataset.s=sv;el.dataset.a=av;
+    el.title=arabic;el.setAttribute('aria-label',arabic);
+    if(state.selectedWord&&el.dataset.word===state.selectedWord)el.classList.add('hit');
+    const ix=verseIndexFor(sv,av);
+    if(state.mode==='hifz'&&state.hidden&&ix>=0&&!state.revealed.has(ix))el.classList.add('hideword');
+    el.onclick=e=>{e.stopPropagation();if(state.mode==='hifz'&&state.hidden&&el.classList.contains('hideword')){revealVerseByKey(sv,av);return}if(state.wordTap)openWord(arabic)};
+   }
+   el.textContent=item.qpcV2;row.append(el);num++;
+  }
+  frame.append(row);
+ }
+ const oldLines=data.lines.filter(x=>x.type==='ayah-line').length;
+ if(lineCount!==oldLines||num===0){card.dataset.fontStatus='line-mismatch';const note=card.querySelector('.print-status');if(note){note.textContent='⚠ لم يتطابق توزيع الأسطر؛ عُرضت نسخة الأسطر النصية بدلًا منها';note.classList.add('warning')}updatePrintedBadge(page,'error');console.warn('QCF V2 line-count mismatch',page,lineCount,oldLines);return}
+ oldFrame.replaceWith(frame);card.classList.add('qcf-ready');card.dataset.fontStatus='qcf-v2';
+ const note=card.querySelector('.print-status');if(note){note.classList.remove('warning');note.textContent='✓ خط QCF V2 المصحفي · '+ar(lineCount)+' سطرًا حسب طبعة المدينة'}
+ updatePrintedBadge(page,'ok');
+ card.dataset.lineCount=String(lineCount);card.dataset.glyphs=String(num);
+ const head=card.querySelector('.madina-page-head strong');if(head)head.title='خط مصحف المدينة QCF V2';
+ requestAnimationFrame(()=>fitExactCard(card));
+}
+
+
+/* V8 — truly printed, immutable page images. 604 original Madani page layouts. */
+const paperReader={first:0,last:0,stamp:0,prefetching:false};
+const paperSources={
+ primary:(n)=>'https://raw.githubusercontent.com/akram-seid/quran-hd-images/main/images/'+p3(n)+'.jpg',
+ cdn:(n)=>'https://cdn.jsdelivr.net/gh/akram-seid/quran-hd-images@main/images/'+p3(n)+'.jpg',
+ fallback:(n)=>'https://raw.githubusercontent.com/Miftah-Fentaw/Quran-Images/main/png/'+n+'.png'
+};
+function paperPicture(n,eager=false){
+ const image=document.createElement('img');image.className='paper-page-image';image.alt='صورة الصفحة '+ar(n)+' من مصحف المدينة: النص والآيات بتوزيعها المصحفي المطبوع';
+ image.loading=eager?'eager':'lazy';image.decoding='async';image.draggable=false;
+ const sources=[paperSources.primary(n),paperSources.cdn(n),paperSources.fallback(n)];let index=0;
+ const swap=()=>{if(index<sources.length){image.src=sources[index++];return}const box=image.closest('.paper-image-wrap');if(box){const error=document.createElement('div');error.className='paper-error';error.textContent='تعذر تحميل صورة الصفحة '+ar(n)+'؛ تحقق من الاتصال بالإنترنت، ثم افتح الصفحة مجددًا.';image.replaceWith(error)}};
+ image.onerror=swap;swap();return image;
+}
+function paperCard(n){
+ const c=document.createElement('section');c.className='paper-page tone-'+((n-1)%6);c.id='paper-page-'+n;c.dataset.page=n;
+ c.setAttribute('aria-label','صفحة '+ar(n)+' من المصحف الورقي');
+ const top=document.createElement('div');top.className='paper-page-top';
+ const label=document.createElement('strong');label.textContent='مصحف المدينة · الصفحة '+ar(n);
+ const label2=document.createElement('span');label2.textContent='١٥ سطرًا — قراءة فقط';top.append(label,label2);c.append(top);
+ const wrap=document.createElement('div');wrap.className='paper-image-wrap';
+ const img=paperPicture(n,n===state.page);wrap.append(img);
+ for(const [side,st] of [['start','۞'],['end','۞']]){const d=document.createElement('span');d.className='paper-rosette '+side;d.textContent=st;d.setAttribute('aria-hidden','true');wrap.append(d)}
+ c.append(wrap);
+ const bottom=document.createElement('div');bottom.className='paper-page-bottom';
+ const num=document.createElement('span');num.textContent='﴿ '+ar(n)+' ﴾';
+ const action=document.createElement('button');action.type='button';action.className='paper-link';action.textContent='فتح الصفحة التفاعلية';action.title='الانتقال إلى نفس الصفحة لتحديد الكلمات وفتح التفسير';
+ action.onclick=()=>{const old=n;state.page=old;changeLayout('madina')};bottom.append(num,action);c.append(bottom);
+ return c;
+}
+function spreadStart(n){return Number(n)%2===0?Number(n)-1:Number(n)}
+function paperSpread(n){
+ const first=spreadStart(n),wrap=document.createElement('div');wrap.className='page-spread paper-spread';wrap.dataset.spreadStart=String(first);
+ wrap.setAttribute('aria-label','الوجه الأيمن '+ar(first)+' والوجه الأيسر '+ar(Math.min(604,first+1)));
+ wrap.append(paperCard(first));if(first+1<=604)wrap.append(paperCard(first+1));return wrap;
+}
+function paperNav(n,isFlow){
+ showExactNav(n,isFlow);
+ $('readerTip').textContent='المصحف الورقي: صورة الصفحة الأصلية، ولا يعيد المتصفح توزيع الكلمات أو الأسطر. استخدم «صفحات المدينة التفاعلية» للضغط على الكلمات والتفسير.';
+ $('flowLabel').textContent=isFlow?'المصحف الورقي متصل':'صفحات المصحف الورقي';
+ $('navCount').textContent=state.spread?'وجهان ورقيان':'الصفحات الورقية';
+ $('chapterLabel').textContent='مصحف المدينة الورقي';
+ $('printedFontBadge').textContent='صفحة مصورة';
+}
+function renderPaper(){
+ const stamp=++paperReader.stamp;const n=state.page;
+ $('verses').classList.remove('madina-reader');$('verses').classList.add('paper-reader');
+ $('verses').replaceChildren();$('pageSurahBanner').replaceChildren();$('pageFoot').textContent='';paperNav(n,state.continuous);
+ if(!state.continuous){
+  if(state.spread){const start=spreadStart(n);$('verses').append(paperSpread(start));paperReader.first=start;paperReader.last=Math.min(604,start+1)}
+  else{$('verses').append(paperCard(n));paperReader.first=n;paperReader.last=n}
+  return;
+ }
+ let a,b;const fragment=document.createDocumentFragment();
+ if(state.spread){a=Math.max(1,spreadStart(n)-2);b=Math.min(604,spreadStart(n)+3)}
+ else {a=Math.max(1,n-1);b=Math.min(604,n+2)}
+ if(n===1){const hint=document.createElement('div');hint.className='paper-mode-explain';hint.textContent='الصفحات المصورة تحفظ شكل المصحف الأصلي. يمكن التمرير المتصل أو العرض وجهًا واحدًا أو وجهين.';fragment.append(hint)}
+ if(state.spread){for(let x=a;x<=b;x+=2)fragment.append(paperSpread(x))}
+ else {for(let x=a;x<=b;x++)fragment.append(paperCard(x))}
+ $('verses').append(fragment);paperReader.first=a;paperReader.last=b;state.flowEnd=b===604?state.verses.length:0;
+ requestAnimationFrame(()=>{if(stamp!==paperReader.stamp||state.layout!=='paper')return;
+  const el=document.getElementById('paper-page-'+n);if(el){const rect=el.getBoundingClientRect();const offset=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--basaer-reading-offset'))||110;window.scrollTo({top:window.scrollY+rect.top-offset,behavior:'instant'})}state.flowLastY=window.scrollY;paperEnsureContent()});
+}
+function paperEnsureContent(){
+ if(state.layout!=='paper'||!state.continuous||paperReader.prefetching)return;
+ const root=$('verses');const cards=root.querySelectorAll('.paper-page');if(!cards.length)return;
+ const last=cards[cards.length-1].getBoundingClientRect(),first=cards[0].getBoundingClientRect();
+ const more=last.bottom-window.innerHeight<Math.max(1000,window.innerHeight*1.3)&&paperReader.last<604;
+ const prev=first.top>-500&&paperReader.first>1&&window.scrollY<state.flowLastY-3;
+ state.flowLastY=window.scrollY;if(!more&&!prev)return;
+ paperReader.prefetching=true;
+ if(more){const n=paperReader.last+1;
+  if(state.spread){root.append(paperSpread(n));paperReader.last=Math.min(604,n+1)}
+  else{root.append(paperCard(n));paperReader.last=n}
+  state.flowEnd=paperReader.last===604?state.verses.length:0;
+ }else if(prev){const n=state.spread?paperReader.first-2:paperReader.first-1;
+  const prior=document.documentElement.scrollHeight,y=window.scrollY;
+  if(state.spread)root.prepend(paperSpread(n));else root.prepend(paperCard(n));paperReader.first=n;
+  const delta=document.documentElement.scrollHeight-prior;window.scrollTo({top:y+delta,behavior:'instant'});
+  if(state.autoScroll){state.autoTargetY+=delta;state.autoObservedY+=delta}
+ }
+ paperReader.prefetching=false;
+}
+function paperUpdatePosition(){
+ if(state.layout!=='paper'||!state.continuous)return;
+ const pages=$('verses').querySelectorAll('.paper-page');let selected=null;
+ const threshold=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--basaer-reading-offset'))||140;
+ for(const c of pages){if(c.getBoundingClientRect().bottom>threshold+25){selected=c;break}}
+ if(!selected)return;
+ const n=Number(selected.dataset.page);if(n===state.page)return;
+ state.page=n;
+ const ids=state.byPage.get(n);if(ids?.length){state.verseIndex=ids[0];savePosition()}
+ paperNav(n,true);
+}
+function initPaperControls(){
+ const slider=$('paperPageWidth'),output=$('paperPageWidthText');
+ const scrollButton=$('toolbarScrollBtn');if(scrollButton)scrollButton.onclick=toggleAutoScroll;
+ if(!slider||!output)return;
+ slider.value=String(state.paperWidth);output.textContent=ar(state.paperWidth);
+ slider.oninput=()=>{state.paperWidth=Math.max(390,Math.min(820,Number(slider.value)||630));document.documentElement.style.setProperty('--paper-width',state.paperWidth+'px');output.textContent=ar(state.paperWidth);savePrefs()};
+}
+
+bootstrap();v5Init();initPaperControls();
+
+(function initAssistiveController(){
+ const orb=$('assistiveOrb'),scrim=$('assistiveScrim'),close=$('closeAssistive'),sheet=scrim.querySelector('.assistive-sheet');
+ const sourceToolbar=document.querySelector('main .toolbar');
+ const modes=document.querySelector('header .top-center');
+ const searches=[document.getElementById('searchBtn'),document.getElementById('settingsBtn')];
+ if(sourceToolbar)$('assistiveToolbarSlot').append(sourceToolbar);
+ if(modes)$('assistiveModeSlot').append(modes);
+ searches.forEach(b=>{if(b)$('assistiveActions').append(b)});
+ const old=readLocal('prefs',{});state.spread=old.spread===true;
+ const two=$('twoPageToggle');
+ function redrawToggle(){two.setAttribute('aria-pressed',String(state.spread));two.innerHTML=state.spread?'▣ عرض الوجهين: مفعَّل':'▣ عرض وجهين جنب بعض';document.body.classList.toggle('spread-two',state.spread)}
+ redrawToggle();
+ if(state.spread)render();
+ function open(){if(state.autoScroll)pauseScroll();scrim.hidden=false;orb.setAttribute('aria-expanded','true');close.focus()}
+ function shut(){scrim.hidden=true;orb.setAttribute('aria-expanded','false');orb.focus({preventScroll:true})}
+ close.addEventListener('click',shut);scrim.addEventListener('click',e=>{if(e.target===scrim)shut()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!scrim.hidden)shut()});
+ scrim.addEventListener('click',e=>{if(e.target.closest('[data-layout],[data-mode],#searchBtn,#settingsBtn,#jumpOpen,#bookmarksBtn,#readToolsBtn,#fullBtn,#compareGhafir')){setTimeout(()=>{if(!scrim.hidden)shut()},0)}});
+ two.addEventListener('click',()=>{if(state.autoScroll)pauseScroll();if(state.continuous)updateFlowPosition();state.spread=!state.spread;redrawToggle();savePrefs();render();toast(state.spread?'تم تفعيل الوجهين. في الشاشة الصغيرة يظهران تباعًا.':'تم تفعيل الوجه الواحد')});
+ $('assistiveQuickScroll').addEventListener('click',()=>{shut();toggleAutoScroll()});
+ let gesture=null,suppressClick=false;
+ orb.addEventListener('pointerdown',e=>{if(e.button!==0)return;gesture={x:e.clientX,y:e.clientY,top:orb.getBoundingClientRect().top,left:orb.getBoundingClientRect().left,moved:false};orb.setPointerCapture?.(e.pointerId)});
+ orb.addEventListener('pointermove',e=>{if(!gesture)return;const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;if(Math.hypot(dx,dy)>9)gesture.moved=true;if(!gesture.moved)return;const x=Math.max(4,Math.min(window.innerWidth-orb.offsetWidth-4,gesture.left+dx)),y=Math.max(4,Math.min(window.innerHeight-orb.offsetHeight-4,gesture.top+dy));orb.style.left=x+'px';orb.style.top=y+'px';orb.style.right='auto';orb.style.bottom='auto'});
+ orb.addEventListener('pointerup',()=>{if(gesture?.moved){suppressClick=true;setTimeout(()=>{suppressClick=false},180);saveLocal('assistive_orb_pos_v1',{left:Math.round(orb.getBoundingClientRect().left),top:Math.round(orb.getBoundingClientRect().top)})}gesture=null});
+ orb.addEventListener('pointercancel',()=>{gesture=null});
+ orb.addEventListener('click',e=>{if(suppressClick){suppressClick=false;return}open()});
+ const pos=readLocal('assistive_orb_pos_v1',null);if(pos&&Number.isFinite(pos.left)&&Number.isFinite(pos.top)){orb.style.left=Math.max(4,Math.min(window.innerWidth-70,pos.left))+'px';orb.style.top=Math.max(4,Math.min(window.innerHeight-70,pos.top))+'px';orb.style.right='auto'}
+ window.addEventListener('resize',()=>{if(orb.style.left){orb.style.left=Math.max(4,Math.min(window.innerWidth-orb.offsetWidth-4,parseFloat(orb.style.left)||0))+'px';orb.style.top=Math.max(4,Math.min(window.innerHeight-orb.offsetHeight-4,parseFloat(orb.style.top)||0))+'px'}});
+})();
+
+$('compareGhafir').onclick=()=>{if(state.layout!=='madina')changeLayout('madina');if(!state.continuous)setContinuous(true);goToPage(473);toast('المقارنة: الصفحة ٤٧٣ تليها ٤٧٤، بنفس تقسيم الأسطر')};
+</script>
+<script>
+/* Compact navigation can stay visible; full settings live in AssistiveTouch circle. */
+(function initPinnedReadingNav(){
+ const nav=document.querySelector('.reading > .nav');if(!nav)return;
+ function sync(){const height=Math.ceil(nav.getBoundingClientRect().height);document.documentElement.style.setProperty('--basaer-header-height','0px');document.documentElement.style.setProperty('--basaer-nav-top','0px');document.documentElement.style.setProperty('--basaer-reading-offset',height+22+'px')}
+ sync();if('ResizeObserver' in window)new ResizeObserver(sync).observe(nav);window.addEventListener('resize',sync,{passive:true})
+})();
+
 </script>
 </body>
 </html>
